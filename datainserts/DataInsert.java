@@ -12,7 +12,7 @@ public class DataInsert {
         StringTokenizer st = null;
 
         try {
-            String str = "insert into customers values (";
+            String str = "insert into customer values (";
             BufferedReader reader = new BufferedReader(new FileReader("names.txt"));
             BufferedWriter writer = new BufferedWriter(new FileWriter("customers.sql"));
 
