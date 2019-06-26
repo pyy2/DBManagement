@@ -1,3 +1,5 @@
+import static java.util.Calendar.DAY_OF_YEAR;
+
 import java.io.*;
 import java.util.*;
 
@@ -7,7 +9,7 @@ public class DataInsert {
 
         Scanner scanner = null;
         Random rand = new Random();
-        String[][] info = new String[20][3];
+        String[][] info = new String[20][4];
         String line = "";
         StringTokenizer st = null;
 
@@ -19,20 +21,39 @@ public class DataInsert {
             int count = 0;
             while ((line = reader.readLine()) != null && count < 20) {
                 st = new StringTokenizer(line);
-                info[count][0] = st.nextToken();
+                info[count][0] = Integer.toString(rand.nextInt(100000));
                 info[count][1] = st.nextToken();
-                info[count][2] = info[count][0].charAt(0) + info[count][1] + "@gmail.com";
+                info[count][2] = st.nextToken();
+                info[count][3] = info[count][0].charAt(0) + info[count][1] + "@gmail.com";
                 count++;
             }
 
             String currentLine = reader.readLine();
             for (int i = 0; i < 20; i++) {
                 writer.write(str);
-                writer.write(Integer.toString(rand.nextInt(100000)) + ","); // id
-                writer.write("'" + info[i][0] + "'" + "," + "'" + info[i][1] + "'" + "," + "'" + info[i][2] + "'" + ","
+                writer.write(info[i][0] + ","); // id
+                writer.write("'" + info[i][1] + "'" + "," + "'" + info[i][2] + "'" + "," + "'" + info[i][3] + "'" + ","
                         + Integer.toString(rand.nextInt(3) + 1) + "," + Integer.toString(rand.nextInt(1000)));
-
                 writer.write(");\n");
+            }
+            writer.write("\n");
+            // Purchase_ID int,
+            // Customer_ID int,
+            // Store_ID int,
+            // Purchase_Time date, YYYY-MM-DD
+            // primary key (Purchase_ID),
+            // foreign key (Customer_ID) references customer(Customer_ID),
+            // foreign key (Store_ID) references store(Store_ID)
+
+            str = "insert into purchase values (";
+
+            for (int i = 0; i < 50; i++) {
+
+                writer.write(str + Integer.toString(i + 1) + "," + info[rand.nextInt(20)][0] + ","
+                        + Integer.toString(rand.nextInt(3) + 1) + "," + "'" + Integer.toString(rand.nextInt(3) + 2016)
+                        + "-" + Integer.toString(rand.nextInt(12) + 1) + "-" + Integer.toString(rand.nextInt(30) + 1)
+                        + "');\n");
+
             }
             reader.close();
             writer.close();
@@ -43,5 +64,9 @@ public class DataInsert {
             System.err.println(e);
             System.exit(2);
         }
+    }
+
+    public static int randBetween(int start, int end) {
+        return start + (int) Math.round(Math.random() * (end - start));
     }
 }
