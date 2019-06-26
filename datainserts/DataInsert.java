@@ -29,7 +29,7 @@ public class DataInsert {
             for (int i = 0; i < 20; i++) {
                 writer.write(str);
                 writer.write(Integer.toString(rand.nextInt(100000)) + ","); // id
-                writer.write(info[i][0] + "," + info[i][1] + "," + info[i][2] + ","
+                writer.write("'" + info[i][0] + "'" + "," + "'" + info[i][1] + "'" + "," + "'" + info[i][2] + "'" + ","
                         + Integer.toString(rand.nextInt(3) + 1) + "," + Integer.toString(rand.nextInt(1000)));
 
                 writer.write(");\n");
