@@ -14,7 +14,7 @@ drop table if exists buyCoffee;
 
 create table if not exists store
 (
-  Store_ID int,
+  Store_ID serial,
   Name varchar(20),
   Address varchar(20),
   Store_Type varchar(20),
@@ -25,7 +25,7 @@ create table if not exists store
 
 create table if not exists coffee
 (
-  Coffee_ID int,
+  Coffee_ID serial,
   Name varchar(20),
   Description varchar(20),
   Intensity int,
@@ -38,7 +38,7 @@ create table if not exists coffee
 
 create table if not exists promotion
 (
-  Promotion_ID int,
+  Promotion_ID serial,
   Name varchar(20),
   Start_Date date,
   End_Date date,
@@ -47,7 +47,7 @@ create table if not exists promotion
 
 create table if not exists memberLevel
 (
-  MemberLevel_ID int,
+  MemberLevel_ID serial,
   Name varchar(20),
   Booster_Factor float,
   primary key (MemberLevel_ID)
@@ -55,7 +55,7 @@ create table if not exists memberLevel
 
 create table if not exists customer
 (
-  Customer_ID int,
+  Customer_ID serial,
   First_Name varchar(20),
   Last_Name varchar(20),
   Email varchar(20),
@@ -67,7 +67,7 @@ create table if not exists customer
 
 create table if not exists purchase
 (
-  Purchase_ID int,
+  Purchase_ID serial,
   Customer_ID int,
   Store_ID int,
   Purchase_Time date,
@@ -85,7 +85,7 @@ create table if not exists offerCoffee
   foreign key (Coffee_ID) references coffee(Coffee_ID)
 );
 
-create table if not exists hasPromotions
+create table if not exists hasPromotion
 (
   Store_ID int,
   Promotion_ID int,
