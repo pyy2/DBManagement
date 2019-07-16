@@ -1,6 +1,5 @@
 JC = javac
 JFLAGS = -cp './src/jar/postgresql-42.2.5.jar:.'
-JFLAGS2 = -cp '../src/jar/postgresql-42.2.5.jar:.'
 JAR = https://jdbc.postgresql.org/download/postgresql-42.2.5.jar
 
 default: all
