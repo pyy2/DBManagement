@@ -14,3 +14,6 @@ all:
 clean:
 	rm -r build
 	rm -r src/jar
+
+ft:
+	cd build && java $(JFLAGS2) BoutiqueCoffee
