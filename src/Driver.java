@@ -43,8 +43,9 @@ public class Driver {
 
             switch (choice) {
             case 0:
+
                 System.out.println("Enter store name: ");
-                String storeName = scan.nextLine();
+                String name = scan.nextLine();
                 System.out.println("Enter store address: ");
                 String address = scan.nextLine();
                 System.out.println("Enter store type: ");
@@ -54,7 +55,10 @@ public class Driver {
                 System.out.println("Enter store gps latitude: ");
                 double gpsLat = Double.parseDouble(scan.nextLine());
 
-                bc.addStore(storeName, address, storeType, gpsLong, gpsLat);
+                if (bc.addStore(name, address, storeType, gpsLong, gpsLat) == -1)
+                    System.out.println("Operation Failed");
+                else
+                    System.out.println("Store Successfully Added");
                 break;
             // case 1:
             // addCoffee();

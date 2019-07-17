@@ -10,14 +10,20 @@ public class BoutiqueCoffee {
         private static Connection connection; // used to hold the jdbc connection to the DB
         private Statement statement; // used to create an instance of the connection
         private PreparedStatement prepStatement; // used to create a prepared statement, that will be later reused
-        private ResultSet resultSet; // used to hold the result of your query (if one exists)
+        private ResultSet rs; // used to hold the result of your query (if one exists)
         private String query; // this will hold the query we are using
 
         public BoutiqueCoffee(String username, String password) {
                 scan = new Scanner(System.in);
+                statement = null;
+                connection = null;
+                prepStatement = null;
+                rs = null;
+                query = "";
+
                 try {
                         // Class.forName("org.postgresql.Driver");
-                        String url = "jdbc:postgresql://localhost/postgres?currentSchema=cs1555/";
+                        String url = "jdbc:postgresql://localhost/postgres?currentSchema=public/";
                         Properties props = new Properties();
                         System.out.println("Connecting to Postgres...");
                         props.setProperty("user", username);
@@ -27,14 +33,46 @@ public class BoutiqueCoffee {
                         System.err.println(e);
                         System.exit(0);
                 }
-
         }
 
         // @return the auto-generated ID of this store or -1 if the operation is not
         // possible or failed
         public int addStore(String name, String address, String storeType, double gpsLong, double gpsLat) {
-                int id = 0;
-                return id;
+                int result = 0;
+                rs = null;
+
+                try {
+
+                        // // get the last serial value
+                        // statement = connection.createStatement();
+                        // rs = statement.executeQuery("SELECT LAST_INSERT_ID() FROM public.store");
+                        // rs.next();
+                        // int storeID = rs.getInt(1);
+                        // statement.close();
+
+                        // query = "INSERT INTO public.store VALUES (?,?,?,?,?,?)";
+                        // prepStatement = connection.prepareStatement(query);
+                        // prepStatement.setInt(1, storeID);
+                        // prepStatement.setString(2, name);
+                        // prepStatement.setString(3, address);
+                        // prepStatement.setString(4, storeType);
+                        // prepStatement.setDouble(5, gpsLong);
+                        // prepStatement.setDouble(6, gpsLat);
+                        // result = prepStatement.executeUpdate();
+
+                        // while (rs.next()) {
+                        // System.out.println(rs.getString(1));
+                        // System.out.println(rs.getString(2));
+                        // System.out.println(rs.getString(3));
+                        // System.out.println(rs.getString(4));
+                        // System.out.println(rs.getString(5));
+                        // System.out.println(rs.getString(6));
+                        // }
+                        // rs.close();
+                } catch (Exception e) {
+                        e.printStackTrace();
+                }
+                return result;
         }
 
         // // @return the auto-generated ID of this coffee or -1 if the operation is not
