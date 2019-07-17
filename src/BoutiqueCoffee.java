@@ -43,25 +43,18 @@ public class BoutiqueCoffee {
         public int addStore(String name, String address, String storeType, double gpsLong, double gpsLat) {
                 int result = -1;
                 try {
-
-                        // get the last serial value
-                        statement = connection.createStatement();
-                        rs = statement.executeQuery("SELECT MAX(store_id) FROM store");
-                        rs.next();
-                        int storeId = rs.getInt(1) + 1;
-                        statement.close();
-
-                        // insert
-                        query = "INSERT INTO store VALUES (?,?,?,?,?,?)";
+                        query = "INSERT INTO store (\"store_id\",\"name\", \"address\", \"store_type\", \"gps_long\", \"gps_lat\") VALUES (DEFAULT,?,?,?,?,?) RETURNING store_id";
                         prepStatement = connection.prepareStatement(query);
-                        prepStatement.setInt(1, storeId);
-                        prepStatement.setString(2, name);
-                        prepStatement.setString(3, address);
-                        prepStatement.setString(4, storeType);
-                        prepStatement.setDouble(5, gpsLong);
-                        prepStatement.setDouble(6, gpsLat);
-                        prepStatement.executeUpdate();
-                        result = storeId;
+                        prepStatement.setString(1, name);
+                        prepStatement.setString(2, address);
+                        prepStatement.setString(3, storeType);
+                        prepStatement.setDouble(4, gpsLong);
+                        prepStatement.setDouble(5, gpsLat);
+                        rs = prepStatement.executeQuery();
+
+                        if (rs.next()) {
+                                result = rs.getInt(1);
+                        }
 
                 } catch (Exception e) {
                         e.printStackTrace();
@@ -75,27 +68,19 @@ public class BoutiqueCoffee {
                         double redeemPoints) {
                 int result = -1;
                 try {
-
-                        // get the last serial value
-                        statement = connection.createStatement();
-                        rs = statement.executeQuery("SELECT MAX(coffee_id) FROM coffee");
-                        rs.next();
-                        int coffeeId = rs.getInt(1) + 1;
-                        statement.close();
-
-                        // insert
-                        query = "INSERT INTO coffee VALUES (?,?,?,?,?,?,?)";
+                        query = "INSERT INTO coffee (\"coffee_id\", \"name\", \"description\", \"intensity\", \"price\", \"reward_points\", \"redeem_points\") VALUES (DEFAULT,?,?,?,?,?,?) RETURNING coffee_id";
                         prepStatement = connection.prepareStatement(query);
-                        prepStatement.setInt(1, coffeeId);
-                        prepStatement.setString(2, name);
-                        prepStatement.setString(3, description);
-                        prepStatement.setInt(4, intensity);
-                        prepStatement.setDouble(5, price);
-                        prepStatement.setDouble(6, rewardPoints);
-                        prepStatement.setDouble(7, redeemPoints);
-                        prepStatement.executeUpdate();
+                        prepStatement.setString(1, name);
+                        prepStatement.setString(2, description);
+                        prepStatement.setInt(3, intensity);
+                        prepStatement.setDouble(4, price);
+                        prepStatement.setDouble(5, rewardPoints);
+                        prepStatement.setDouble(6, redeemPoints);
+                        rs = prepStatement.executeQuery();
 
-                        result = coffeeId;
+                        if (rs.next()) {
+                                result = rs.getInt(1);
+                        }
                 } catch (Exception e) {
                         e.printStackTrace();
                 }
@@ -124,24 +109,16 @@ public class BoutiqueCoffee {
         public int addPromotion(String name, Date startDate, Date endDate) {
                 int result = -1;
                 try {
-
-                        // get the last serial value
-                        statement = connection.createStatement();
-                        rs = statement.executeQuery("SELECT MAX(promotion_id) FROM promotion");
-                        rs.next();
-                        int promotionId = rs.getInt(1) + 1;
-                        statement.close();
-
-                        // insert
-                        query = "INSERT INTO promotion VALUES (?,?,?,?)";
+                        query = "INSERT INTO promotion (\"promotion_id\", \"name\", \"start_date\", \"end_date\") VALUES (DEFAULT,?,?,?) RETURNING promotion_id";
                         prepStatement = connection.prepareStatement(query);
-                        prepStatement.setInt(1, promotionId);
-                        prepStatement.setString(2, name);
-                        prepStatement.setDate(3, startDate);
-                        prepStatement.setDate(4, endDate);
-                        prepStatement.executeUpdate();
+                        prepStatement.setString(1, name);
+                        prepStatement.setDate(2, startDate);
+                        prepStatement.setDate(3, endDate);
+                        rs = prepStatement.executeQuery();
 
-                        result = promotionId;
+                        if (rs.next()) {
+                                result = rs.getInt(1);
+                        }
                 } catch (Exception e) {
                         e.printStackTrace();
                 }
@@ -187,23 +164,15 @@ public class BoutiqueCoffee {
         public int addMemberLevel(String name, double boosterFactor) {
                 int result = -1;
                 try {
-
-                        // get the last serial value
-                        statement = connection.createStatement();
-                        rs = statement.executeQuery("SELECT MAX(memberlevel_id) FROM memberlevel");
-                        rs.next();
-                        int memberId = rs.getInt(1) + 1;
-                        statement.close();
-
-                        // insert
-                        query = "INSERT INTO memberlevel VALUES (?,?,?)";
+                        query = "INSERT INTO memberlevel (\"memberlevel_id\", \"name\", \"booster_factor\") VALUES (DEFAULT,?,?) RETURNING memberlevel_id";
                         prepStatement = connection.prepareStatement(query);
-                        prepStatement.setInt(1, memberId);
-                        prepStatement.setString(2, name);
-                        prepStatement.setDouble(3, boosterFactor);
-                        prepStatement.executeUpdate();
+                        prepStatement.setString(1, name);
+                        prepStatement.setDouble(2, boosterFactor);
+                        rs = prepStatement.executeQuery();
 
-                        result = memberId;
+                        if (rs.next()) {
+                                result = rs.getInt(1);
+                        }
                 } catch (Exception e) {
                         e.printStackTrace();
                 }
@@ -216,25 +185,18 @@ public class BoutiqueCoffee {
                 int result = -1;
                 try {
 
-                        // get the last serial value
-                        statement = connection.createStatement();
-                        rs = statement.executeQuery("SELECT MAX(customer_id) FROM customer");
-                        rs.next();
-                        int customerId = rs.getInt(1) + 1;
-                        statement.close();
-
-                        // insert
-                        query = "INSERT INTO customer VALUES (?,?,?,?,?,?)";
+                        query = "INSERT INTO customer (\"customer_id\", \"first_name\", \"last_name\", \"email\", \"memberlevel_id\", \"total_points\") VALUES (DEFAULT,?,?,?,?,?) RETURNING customer_id";
                         prepStatement = connection.prepareStatement(query);
-                        prepStatement.setInt(1, customerId);
-                        prepStatement.setString(2, firstName);
-                        prepStatement.setString(3, lastName);
-                        prepStatement.setString(4, email);
-                        prepStatement.setInt(5, memberLevelId);
-                        prepStatement.setDouble(6, totalPoints);
-                        prepStatement.executeUpdate();
+                        prepStatement.setString(1, firstName);
+                        prepStatement.setString(2, lastName);
+                        prepStatement.setString(3, email);
+                        prepStatement.setInt(4, memberLevelId);
+                        prepStatement.setDouble(5, totalPoints);
+                        rs = prepStatement.executeQuery();
 
-                        result = customerId;
+                        if (rs.next()) {
+                                result = rs.getInt(1);
+                        }
                 } catch (Exception e) {
                         e.printStackTrace();
                 }
@@ -259,29 +221,18 @@ public class BoutiqueCoffee {
                         else if (coffeeIds.size() != redeemQuantities.size())
                                 throw new IllegalArgumentException();
 
-                        // get the last serial value
-                        statement = connection.createStatement();
-                        rs = statement.executeQuery("SELECT MAX(purchase_id) FROM purchase");
-                        rs.next();
-                        int purchaseId = rs.getInt(1) + 1;
-                        statement.close();
-
-                        // insert
                         for (int i = 0; i < coffeeIds.size(); i++) {
-                                query = "INSERT INTO customer VALUES (?,?,?,?,?,?)";
+                                query = "INSERT INTO purchase (\"purchase_id\", \"customer_id\", \"store_id\", \"purchase_time\") VALUES (DEFAULT,?,?,?)";
                                 prepStatement = connection.prepareStatement(query);
-                                prepStatement.setInt(1, purchaseId);
-                                prepStatement.setInt(2, customerId);
-                                prepStatement.setInt(3, storeId);
-                                prepStatement.setDate(4, purchaseTime);
-                                prepStatement.setInt(5, coffeeIds.get(i));
-                                prepStatement.setInt(6, purchaseQuantities.get(i));
-                                prepStatement.setInt(6, redeemQuantities.get(i));
-                                prepStatement.executeUpdate();
-                                purchaseId++;
+                                prepStatement.setInt(1, customerId);
+                                prepStatement.setInt(2, storeId);
+                                prepStatement.setDate(3, purchaseTime);
+                                rs = prepStatement.executeQuery();
                         }
 
-                        result = purchaseId;
+                        if (rs.next()) {
+                                result = rs.getInt(1);
+                        }
                 } catch (Exception e) {
                         e.printStackTrace();
                 }
