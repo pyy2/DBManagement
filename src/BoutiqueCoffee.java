@@ -3,101 +3,39 @@ import java.io.*;
 import java.util.*;
 import java.sql.*; //import the file containing definitions for the parts
 import java.text.ParseException; //needed by java for database connection and manipulation
+import java.sql.DriverManager;
 
 public class BoutiqueCoffee {
-        private static Scanner scan;
+        private Scanner scan;
         private static Connection connection; // used to hold the jdbc connection to the DB
         private Statement statement; // used to create an instance of the connection
         private PreparedStatement prepStatement; // used to create a prepared statement, that will be later reused
         private ResultSet resultSet; // used to hold the result of your query (if one exists)
         private String query; // this will hold the query we are using
 
-        public static void main(String[] args) {
+        public BoutiqueCoffee(String username, String password) {
+                scan = new Scanner(System.in);
                 try {
-                        scan = new Scanner(System.in);
-                        Console console = System.console();
+                        // Class.forName("org.postgresql.Driver");
                         String url = "jdbc:postgresql://localhost/postgres?currentSchema=cs1555/";
                         Properties props = new Properties();
-
                         System.out.println("Connecting to Postgres...");
-                        System.out.print("Username: ");
-                        String username = scan.nextLine();
-                        String password = new String(console.readPassword("Password: "));
-
                         props.setProperty("user", username);
                         props.setProperty("password", password);
                         connection = DriverManager.getConnection(url, props);
-                        System.out.println(connection.isValid(5));
-
                 } catch (SQLException e) {
                         System.err.println(e);
+                        System.exit(0);
                 }
+
         }
 
-        // public BoutiqueCoffee(int choice) {
-
-        // switch (choice) {
-        // case 0:
-        // addStore();
-        // break;
-        // case 1:
-        // addCoffee();
-        // break;
-        // case 2:
-        // offerCoffee();
-        // break;
-        // case 3:
-        // addPromotion();
-        // break;
-        // case 4:
-        // promoteFor();
-        // break;
-        // case 5:
-        // hasPromotion();
-        // break;
-        // case 6:
-        // addMemberLevel();
-        // break;
-        // case 7:
-        // addCustomer();
-        // break;
-        // case 8:
-        // addPurchase();
-        // break;
-        // case 9:
-        // getCoffees();
-        // break;
-        // case 10:
-        // getCoffeesByKeywords();
-        // break;
-        // case 11:
-        // getPointsByCustomerId();
-        // break;
-        // case 12:
-        // getTopKStoresInPastXMonth();
-        // break;
-        // case 13:
-        // getTopKCustomersInPastXMonth();
-        // break;
-        // default:
-        // System.out.println("Example not found for your entry: " + example_no);
-        // try {
-        // connection.close();
-        // } catch (Exception Ex) {
-        // System.out.println("Error connecting to database. Machine Error: " +
-        // Ex.toString());
-        // }
-        // break;
-        // }
-        // }
-
-        // // @return the auto-generated ID of this store or -1 if the operation is not
-        // // possible or failed
-        // public int addStore(String name, String address, String storeType, double
-        // gpsLong, double gpsLat) {
-        // int id = 0;
-        // return id;
-        // }
+        // @return the auto-generated ID of this store or -1 if the operation is not
+        // possible or failed
+        public int addStore(String name, String address, String storeType, double gpsLong, double gpsLat) {
+                int id = 0;
+                return id;
+        }
 
         // // @return the auto-generated ID of this coffee or -1 if the operation is not
         // // possible or failed
