@@ -1,6 +1,6 @@
 import java.util.*;
 import java.io.*;
-import java.util.Date;
+import java.sql.Date; //import the file containing definitions for the parts
 
 public class Driver {
     public static void main(String[] args) {
@@ -270,15 +270,16 @@ public class Driver {
 
                 tempD = bc.getPointsByCustomerId(customerId);
 
-                if (tempD == -1)
-                    System.out.println("Error Retrieving Customer");
-                else
-                    System.out.println(
-                            "Customer " + Integer.toString(customerId) + " Total Points: " + Double.toString(tempD));
+                // if (tempD == -1)
+                // System.out.println("Error Retrieving Customer");
+                // else
+                // System.out.println(
+                // "Customer " + Integer.toString(customerId) + " Total Points: " +
+                // Double.toString(tempD));
 
-                break;
+                // break;
 
-            // get top K stores past X months
+                // get top K stores past X months
             case 13:
                 System.out.println("Enter # Customers: ");
                 k = Integer.parseInt(scan.nextLine());
