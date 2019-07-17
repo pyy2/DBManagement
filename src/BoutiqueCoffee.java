@@ -17,7 +17,7 @@ public class BoutiqueCoffee {
                 scan = new Scanner(System.in);
                 try {
                         // Class.forName("org.postgresql.Driver");
-                        String url = "jdbc:postgresql://localhost/postgres?currentSchema=cs1555/";
+                        String url = "jdbc:postgresql://localhost/postgres/";
                         Properties props = new Properties();
                         System.out.println("Connecting to Postgres...");
                         props.setProperty("user", username);
@@ -27,14 +27,25 @@ public class BoutiqueCoffee {
                         System.err.println(e);
                         System.exit(0);
                 }
-
         }
 
         // @return the auto-generated ID of this store or -1 if the operation is not
         // possible or failed
         public int addStore(String name, String address, String storeType, double gpsLong, double gpsLat) {
-                int id = 0;
-                return id;
+                int result = 0;
+                try {
+                        query = "INSERT INTO store (\"store_id\", \"name\", \"address\", \"store_type\", \"gps_long\", \"gps_lat\") VALUES (?,?,?,?,?,?)";
+                        prepStatement = connection.prepareStatement(query);
+                        prepStatement.setString(1, name);
+                        prepStatement.setString(2, address);
+                        prepStatement.setString(3, storeType);
+                        prepStatement.setDouble(4, gpsLong);
+                        prepStatement.setDouble(5, gpsLat);
+                        result = prepStatement.executeUpdate();
+                } catch (Exception e) {
+                        e.printStackTrace();
+                }
+                return result;
         }
 
         // // @return the auto-generated ID of this coffee or -1 if the operation is not

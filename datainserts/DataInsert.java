@@ -21,17 +21,18 @@ public class DataInsert {
             int count = 0;
             while ((line = reader.readLine()) != null && count < 20) {
                 st = new StringTokenizer(line);
-                info[count][0] = Integer.toString(rand.nextInt(100000));
+                info[count][0] = Integer.toString(count + 1);
                 info[count][1] = st.nextToken();
                 info[count][2] = st.nextToken();
-                info[count][3] = info[count][0].charAt(0) + info[count][1] + "@gmail.com";
+                info[count][3] =  info[count][1] + "@gmail.com";
                 count++;
             }
 
             String currentLine = reader.readLine();
             for (int i = 0; i < 20; i++) {
                 writer.write(str);
-                writer.write(info[i][0] + ","); // id
+                // writer.write(info[i][0] + ","); // id
+                writer.write("DEFAULT,");
                 writer.write("'" + info[i][1] + "'" + "," + "'" + info[i][2] + "'" + "," + "'" + info[i][3] + "'" + ","
                         + Integer.toString(rand.nextInt(3) + 1) + "," + Integer.toString(rand.nextInt(1000)));
                 writer.write(");\n");
@@ -49,7 +50,7 @@ public class DataInsert {
 
             for (int i = 0; i < 50; i++) {
 
-                writer.write(str + Integer.toString(i + 1) + "," + info[rand.nextInt(20)][0] + ","
+                writer.write(str + "DEFAULT" + "," + info[rand.nextInt(20)][0] + ","
                         + Integer.toString(rand.nextInt(3) + 1) + "," + "'" + Integer.toString(rand.nextInt(3) + 2016)
                         + "-" + Integer.toString(rand.nextInt(12) + 1) + "-" + Integer.toString(rand.nextInt(30) + 1)
                         + "');\n");
