@@ -1,4 +1,4 @@
-import java.util.Date;
+import java.sql.Date;
 import java.io.*;
 import java.util.*;
 import java.sql.*; //import the file containing definitions for the parts
@@ -118,8 +118,30 @@ public class BoutiqueCoffee {
         // @return the auto-generated ID of this promotion or -1 if the operation is not
         // possible or failed
         public int addPromotion(String name, Date startDate, Date endDate) {
-                int id = 0;
-                return id;
+                int result = -1;
+                try {
+
+                        // get the last serial value
+                        statement = connection.createStatement();
+                        rs = statement.executeQuery("SELECT MAX(promotion_id) FROM promotion");
+                        rs.next();
+                        int promotionId = rs.getInt(1) + 1;
+                        statement.close();
+
+                        // insert
+                        query = "INSERT INTO promotion VALUES (?,?,?,?)";
+                        prepStatement = connection.prepareStatement(query);
+                        prepStatement.setInt(1, promotionId);
+                        prepStatement.setString(2, name);
+                        prepStatement.setDate(3, startDate);
+                        prepStatement.setDate(4, endDate);
+                        prepStatement.executeUpdate();
+
+                        result = promotionId;
+                } catch (Exception e) {
+                        e.printStackTrace();
+                }
+                return result;
         }
 
         // @return 1 if the operation succeeded or -1 if the operation is not possible
@@ -228,6 +250,10 @@ public class BoutiqueCoffee {
                         List<Integer> purchaseQuantities, List<Integer> redeemQuantities) {
                 int result = -1;
                 try {
+                        if (coffeeIds.size() != purchaseQuantities.size())
+                                throw new IllegalArgumentException();
+                        else if (coffeeIds.size() != redeemQuantities.size())
+                                throw new IllegalArgumentException();
 
                         // get the last serial value
                         statement = connection.createStatement();
@@ -237,15 +263,19 @@ public class BoutiqueCoffee {
                         statement.close();
 
                         // insert
-                        query = "INSERT INTO customer VALUES (?,?,?,?,?,?)";
-                        prepStatement = connection.prepareStatement(query);
-                        // prepStatement.setInt(1, purchaseId);
-                        // prepStatement.setInt(2, firstName);
-                        // prepStatement.setInt(3, lastName);
-                        // prepStatement.setDate(4, email);
-                        // prepStatement.setInt(5, memberLevelId);
-                        // prepStatement.setDouble(6, totalPoints);
-                        prepStatement.executeUpdate();
+                        for (int i = 0; i < coffeeIds.size(); i++) {
+                                query = "INSERT INTO customer VALUES (?,?,?,?,?,?)";
+                                prepStatement = connection.prepareStatement(query);
+                                prepStatement.setInt(1, purchaseId);
+                                prepStatement.setInt(2, customerId);
+                                prepStatement.setInt(3, storeId);
+                                prepStatement.setDate(4, purchaseTime);
+                                prepStatement.setInt(5, coffeeIds.get(i));
+                                prepStatement.setInt(6, purchaseQuantities.get(i));
+                                prepStatement.setInt(6, redeemQuantities.get(i));
+                                prepStatement.executeUpdate();
+                                purchaseId++;
+                        }
 
                         result = purchaseId;
                 } catch (Exception e) {
