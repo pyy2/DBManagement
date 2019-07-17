@@ -23,7 +23,9 @@ public class BoutiqueCoffee {
 
                 try {
                         // Class.forName("org.postgresql.Driver");
-                        String url = "jdbc:postgresql://localhost/postgres?currentSchema=public/";
+
+                        String url = "jdbc:postgresql://localhost:5432/postgres?currentSchema=cs1555project/";
+
                         Properties props = new Properties();
                         System.out.println("Connecting to Postgres...");
                         props.setProperty("user", username);

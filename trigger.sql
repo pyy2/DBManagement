@@ -1,5 +1,6 @@
 -- Author
 -- Brian Torpey
+-- 7/8/2019
 
 -- trigger for keeping customer total_points up to date at all times
 -- assume redeem and reward points are the same value
