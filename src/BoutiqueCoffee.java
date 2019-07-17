@@ -1,3 +1,4 @@
+import java.sql.Date;
 import java.io.*;
 import java.util.*;
 import java.sql.*; //import the file containing definitions for the parts
@@ -136,7 +137,7 @@ public class BoutiqueCoffee {
                         prepStatement.setDate(4, endDate);
                         prepStatement.executeUpdate();
 
-                        result = coffeeId;
+                        result = promotionId;
                 } catch (Exception e) {
                         e.printStackTrace();
                 }
@@ -268,10 +269,10 @@ public class BoutiqueCoffee {
                                 prepStatement.setInt(1, purchaseId);
                                 prepStatement.setInt(2, customerId);
                                 prepStatement.setInt(3, storeId);
-                                prepStatement.setDate(4, purchaseId);
+                                prepStatement.setDate(4, purchaseTime);
                                 prepStatement.setInt(5, coffeeIds.get(i));
-                                prepStatement.setInt(6, purchaseQuantities.get(i);
-                                prepStatement.setInt(6, redeemQuantities).get(i);
+                                prepStatement.setInt(6, purchaseQuantities.get(i));
+                                prepStatement.setInt(6, redeemQuantities.get(i));
                                 prepStatement.executeUpdate();
                                 purchaseId++;
                         }
@@ -279,8 +280,6 @@ public class BoutiqueCoffee {
                         result = purchaseId;
                 } catch (Exception e) {
                         e.printStackTrace();
-                } catch (IllegalArgumentException e2) {
-                        System.out.println("Coffee does not map 1 to 1");
                 }
                 return result;
         }
