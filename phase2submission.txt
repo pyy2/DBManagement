@@ -1,2 +1,2 @@
-For Phase 1 grade:
+For Phase 2 grade:
 	BoutiqueCoffee.java
