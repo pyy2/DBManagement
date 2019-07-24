@@ -2,12 +2,14 @@ import java.util.*;
 import java.io.*;
 import java.sql.Date; //import the file containing definitions for the parts
 
-public class Driver {
+
+public class BCDriver {
     public static void main(String[] args) {
 
         // init variables
         Scanner scan = new Scanner(System.in);
         Console console = System.console();
+        
 
         String name = "";
         String address = "";
@@ -149,12 +151,22 @@ public class Driver {
 
             // add promotion
             case 4:
-                // System.out.println("Promotion Name: ");
-                // name = scan.nextLine();
-                // System.out.println("Start Date: ");
-                // // Date = new Date
-                // addPromotion();
-                // break;
+                System.out.println("Promotion Name: ");
+                name = scan.nextLine();
+                System.out.println("Start Date: ");                
+                Date apStartDate = new Date(scan.nextLong()); // date takes a long which is the milliseconds since jan 1 1970 00:00:00
+                System.out.println("End Date: ");
+                Date apEndDate = new Date(scan.nextLong());
+                
+                
+                int apResult = bc.addPromotion(name, apStartDate, apEndDate);
+                
+                if (apResult == -1) 
+                	System.out.println("Error Adding Promotion");
+                else 
+                	System.out.println("Successfully Added Promotion " + apResult);
+                
+                break;
 
                 // promote for
             case 5:
@@ -170,15 +182,17 @@ public class Driver {
 
                 break;
 
-            // promote for
+            // has promotion
             case 6:
-                System.out.println("Promote for: ");
+                System.out.println("Store Id: ");
                 storeId = Integer.parseInt(scan.nextLine());
-                System.out.println("Coffee Id: ");
+                System.out.println("Promotion Id: ");
                 promotionId = Integer.parseInt(scan.nextLine());
 
                 if (bc.hasPromotion(storeId, promotionId) == -1)
                     System.out.println("Operation Failed");
+                else 
+                	System.out.println("Operation Succeeded!");
 
                 break;
 
@@ -237,7 +251,12 @@ public class Driver {
                 // in = scan.nextLine();
                 System.out.println("List Purchase Quantities (csv)");
                 System.out.println("List Redeem Qualities (csv):");
-                bc.addPurchase(customerId, storeId, purchaseTime, coffeeIds, purchaseQuantities, redeemQualities);
+                result = bc.addPurchase(customerId, storeId, purchaseTime, coffeeIds, purchaseQuantities, redeemQualities);
+                
+                if (result == -1) 
+                	System.out.println("Operation Failed");                
+                else 
+                	System.out.println("Purchase added successfully!");
 
                 break;
 
@@ -245,6 +264,12 @@ public class Driver {
                 tempL = bc.getCoffees();
                 if (tempL == null)
                     System.out.println("Error retrieving coffeelist");
+                else if (tempL.isEmpty()) 
+                	System.out.println("No coffees in database");
+                else {
+                	for (Integer i : tempL) 
+                		System.out.println(i);
+                }
                 break;
 
             // get coffee by keywords
@@ -255,12 +280,12 @@ public class Driver {
                 keyword2 = scan.nextLine();
 
                 tempL = bc.getCoffeesByKeywords(keyword1, keyword2);
-                if (tempL == null)
+                if (tempL == null || tempL.isEmpty())
                     System.out.println("No Coffee Ids Available");
-                else
-                    // for (Integer i : i)
-                    // System.out.println(tempL.get(i));
-
+                else {
+                	for (Integer i : tempL)
+                		System.out.println(i);
+                }
                     break;
 
                 // get customer points
@@ -270,12 +295,12 @@ public class Driver {
 
                 tempD = bc.getPointsByCustomerId(customerId);
 
-                // if (tempD == -1)
-                // System.out.println("Error Retrieving Customer");
-                // else
-                // System.out.println(
-                // "Customer " + Integer.toString(customerId) + " Total Points: " +
-                // Double.toString(tempD));
+                if (tempD == -1)
+                	System.out.println("Error Retrieving Customer Points");
+                else
+                	System.out.println(
+                		"Customer " + Integer.toString(customerId) + " Total Points: " +
+                		Double.toString(tempD));
 
                 // break;
 
@@ -285,7 +310,12 @@ public class Driver {
                 k = Integer.parseInt(scan.nextLine());
                 System.out.println("Enter Past # Months: ");
                 x = Integer.parseInt(scan.nextLine());
-                bc.getTopKStoresInPastXMonth(k, x);
+                List<Integer> topKStores = bc.getTopKStoresInPastXMonth(k, x);
+                
+                if (topKStores == null || topKStores.isEmpty()) 
+                	System.out.println("Operation Failed or no stores");                
+                else 
+                	System.out.println("Operation Succeeded!");
 
                 break;
 
@@ -295,7 +325,13 @@ public class Driver {
                 k = Integer.parseInt(scan.nextLine());
                 System.out.println("Enter Past # Months: ");
                 x = Integer.parseInt(scan.nextLine());
-                bc.getTopKCustomersInPastXMonth(k, x);
+                List<Integer> topKCustomers = bc.getTopKCustomersInPastXMonth(k, x);
+                
+                if (topKCustomers == null || topKCustomers.isEmpty()) 
+                	System.out.println("Operation Failed or no customers");                
+                else 
+                	System.out.println("Operation Succeeded!");
+                
                 break;
 
             default:
