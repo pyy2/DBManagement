@@ -70,7 +70,6 @@ public class DataInsert {
             }
 
             reader.close();
-            writer.write("\n");
 
             // Add coffee
             str = "insert into coffee values (";
@@ -121,7 +120,6 @@ public class DataInsert {
                 writer.write(");\n");
             }
             reader.close();
-            writer.write("\n");
 
             // // offer coffee
             str = "insert into offercoffee values (";
@@ -183,7 +181,6 @@ public class DataInsert {
             // add customer
 
             reader.close();
-            writer.write("\n");
 
             str = "insert into customer values (";
             reader = new BufferedReader(new FileReader("addCustomer_name.txt"));
@@ -206,7 +203,6 @@ public class DataInsert {
                         + Integer.toString(rand.nextInt(5) + 1) + "," + Integer.toString(rand.nextInt(1000)));
                 writer.write(");\n");
             }
-            writer.write("\n");
 
             // Purchase_ID int,
             // Customer_ID int,
