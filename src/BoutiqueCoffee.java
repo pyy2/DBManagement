@@ -217,14 +217,12 @@ public class BoutiqueCoffee {
                         else if (coffeeIds.size() != redeemQuantities.size())
                                 throw new IllegalArgumentException();
 
-                        for (int i = 0; i < coffeeIds.size(); i++) {
-                                query = "INSERT INTO purchase (\"purchase_id\", \"customer_id\", \"store_id\", \"purchase_time\") VALUES (DEFAULT,?,?,?)";
-                                prepStatement = connection.prepareStatement(query);
-                                prepStatement.setInt(1, customerId);
-                                prepStatement.setInt(2, storeId);
-                                prepStatement.setDate(3, purchaseTime);
-                                rs = prepStatement.executeQuery();
-                        }
+                        query = "INSERT INTO purchase (\"purchase_id\", \"customer_id\", \"store_id\", \"purchase_time\") VALUES (DEFAULT,?,?,?) RETURNING purchase_id";
+                        prepStatement = connection.prepareStatement(query);
+                        prepStatement.setInt(1, customerId);
+                        prepStatement.setInt(2, storeId);
+                        prepStatement.setDate(3, purchaseTime);
+                        rs = prepStatement.executeQuery();
 
                         if (rs.next()) {
                                 result = rs.getInt(1);

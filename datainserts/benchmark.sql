@@ -1,3 +1,10 @@
+
+INSERT INTO memberlevel VALUES (DEFAULT, 'private', 1);
+INSERT INTO memberlevel VALUES (DEFAULT, 'corporal', 1.5);
+INSERT INTO memberlevel VALUES (DEFAULT, 'sergeant', 2);
+INSERT INTO memberlevel VALUES (DEFAULT, 'master', 2.5);
+INSERT INTO memberlevel VALUES (DEFAULT, 'commander', 3);
+
 insert into store values (DEFAULT,'Silverback Pitt','567 Nicolls Ave','Old House','68.4','42.66');
 insert into store values (DEFAULT,'Name Pitt','9013 Cemetery Ave','Corporate','31.31','32.66');
 insert into store values (DEFAULT,'Bullseye Pitt','9 Southampton Ave','Cafe','78.80','1.53');
