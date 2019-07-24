@@ -22,7 +22,11 @@ public class BoutiqueCoffee {
                 query = "";
 
                 try {
-                        String url = "jdbc:postgresql://localhost/postgres";
+                        // Class.forName("org.postgresql.Driver");
+
+                        String url = "jdbc:postgresql://localhost:5432/postgres/cs1555project";
+
+
                         Properties props = new Properties();
                         System.out.println("Connecting to Postgres...");
                         props.setProperty("user", username);
@@ -238,6 +242,21 @@ public class BoutiqueCoffee {
         // failed.
         public List<Integer> getCoffees() {
                 List<Integer> id = new ArrayList<>();
+                try {
+
+                    // get the ids of all coffees
+                    statement = connection.createStatement();
+                    rs = statement.executeQuery("SELECT (Coffee_ID) FROM Coffee");
+                    
+                    // iterate through each row of rs and add coffee_id to id list
+                    while(rs.next()) {
+                    	int i = rs.getInt("Coffee_ID");                    	
+                    	id.add(i);
+                    }
+                    statement.close();   
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 return id;
         }
 
@@ -247,14 +266,58 @@ public class BoutiqueCoffee {
         // database or the operation failed.
         public List<Integer> getCoffeesByKeywords(String keyword1, String keyword2) {
                 List<Integer> id = new ArrayList<>();
+                try {
+
+                    // get the ids of all coffees satisfying condition                    
+              
+                    query = "SELECT (Coffee_ID) " 
+                    		+ "FROM Coffee "  
+                    		+ "WHERE Name LIKE '%?%' AND Name LIKE '%?%'";
+                    
+                    prepStatement = connection.prepareStatement(query);
+                    prepStatement.setString(1, keyword1);
+                    prepStatement.setString(2, keyword2);
+                    
+                    rs = prepStatement.executeQuery();
+                    
+                    
+                    // iterate through each row of rs and add coffee_id to id list
+                    while(rs.next()) {
+                    	int i = rs.getInt("Coffee_ID");                    	
+                    	id.add(i);
+                    }
+         
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 return id;
         }
 
         // @return the total points of the customer identified by the customerId or -1
         // if the operation isnot possible or failed
         public double getPointsByCustomerId(int customerId) {
-                double id = 0;
-                return id;
+                double points = -1;
+                try {
+
+                    // get the ids of all coffees satisfying condition                    
+              
+                    query = "SELECT (Total_Points) " 
+                    		+ "FROM Customer "  
+                    		+ "WHERE Customer_ID = ?";
+                    
+                    prepStatement = connection.prepareStatement(query);
+                    prepStatement.setInt(1, customerId);
+                    
+                    rs = prepStatement.executeQuery();
+                    
+                    if (rs.next()) {
+                    	points = rs.getDouble("Total_Points");
+                    }
+         
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return points;
         }
 
         // @param k - the K in top K@param x - the timespan in month
@@ -274,6 +337,34 @@ public class BoutiqueCoffee {
         // failed.
         public List<Integer> getTopKStoresInPastXMonth(int k, int x) {
                 List<Integer> id = new ArrayList<>();
+                try {
+                	
+                	// past number of days 
+                    int days = 30*x;
+              
+                    
+                    query = "SELECT store_id, sum(purchase_quantity) FROM purchase JOIN buycoffee b ON purchase.purchase_id = b.purchase_id" + 
+                    		"WHERE current_date - purchase_time <= ?" + 
+                    		"GROUP BY store_id" + 
+                    		"ORDER BY sum(b.purchase_quantity) DESC" + 
+                    		"LIMIT ?";
+                    
+                    prepStatement = connection.prepareStatement(query);
+                    prepStatement.setInt(1, days);
+                    prepStatement.setInt(2, k);
+                    
+                    rs = prepStatement.executeQuery();
+                    
+                    
+                    // iterate through each row of rs and add coffee_id to id list
+                    while(rs.next()) {
+                    	int i = rs.getInt("Store_ID");                    	
+                    	id.add(i);
+                    }
+         
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 return id;
         }
 
@@ -294,6 +385,36 @@ public class BoutiqueCoffee {
         // failed.
         public List<Integer> getTopKCustomersInPastXMonth(int k, int x) {
                 List<Integer> id = new ArrayList<>();
+                
+                try {
+                	
+                	// past number of days 
+                    int days = 30*x;
+              
+                    
+                    query = "SELECT customer_id, sum(purchase_quantity) FROM purchase JOIN buycoffee b ON purchase.purchase_id = b.purchase_id" + 
+                    		"WHERE current_date - purchase_time <= ?" + 
+                    		"GROUP BY customer_id" + 
+                    		"ORDER BY sum(b.purchase_quantity) DESC" + 
+                    		"LIMIT ?";
+                    
+                    prepStatement = connection.prepareStatement(query);
+                    prepStatement.setInt(1, days);
+                    prepStatement.setInt(2, k);
+                    
+                    rs = prepStatement.executeQuery();
+                    
+                    
+                    // iterate through each row of rs and add coffee_id to id list
+                    while(rs.next()) {
+                    	int i = rs.getInt("Customer_ID");                    	
+                    	id.add(i);
+                    }
+         
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                
                 return id;
         }
 
