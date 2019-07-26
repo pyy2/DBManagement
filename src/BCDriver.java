@@ -2,14 +2,12 @@ import java.sql.Date;
 import java.util.*;
 import java.io.*;
 
-
 public class BCDriver {
     public static void main(String[] args) {
 
         // init variables
         Scanner scan = new Scanner(System.in);
         Console console = System.console();
-        
 
         String name = "";
         String address = "";
@@ -83,6 +81,7 @@ public class BCDriver {
             System.out.println("12:\tGet Points (By Customer ID)");
             System.out.println("13:\tGet Top X Stores in Past Y Months");
             System.out.println("14:\tGet Top X Customers in Past Y Months");
+            System.out.println("15:\tBenchmark");
             System.out.println("#########################");
 
             choice = Integer.parseInt(scan.nextLine());
@@ -153,22 +152,22 @@ public class BCDriver {
             case 4:
                 System.out.println("Promotion Name: ");
                 name = scan.nextLine();
-                System.out.println("Start Date: ");                
-                Date apStartDate = new Date(scan.nextLong()); // date takes a long which is the milliseconds since jan 1 1970 00:00:00
+                System.out.println("Start Date: ");
+                Date apStartDate = new Date(scan.nextLong()); // date takes a long which is the milliseconds since jan 1
+                                                              // 1970 00:00:00
                 System.out.println("End Date: ");
                 Date apEndDate = new Date(scan.nextLong());
-                
-                
+
                 int apResult = bc.addPromotion(name, apStartDate, apEndDate);
-                
-                if (apResult == -1) 
-                	System.out.println("Error Adding Promotion");
-                else 
-                	System.out.println("Successfully Added Promotion " + apResult);
-                
+
+                if (apResult == -1)
+                    System.out.println("Error Adding Promotion");
+                else
+                    System.out.println("Successfully Added Promotion " + apResult);
+
                 break;
 
-                // promote for
+            // promote for
             case 5:
                 System.out.println("Promote for: ");
                 promotionId = Integer.parseInt(scan.nextLine());
@@ -190,9 +189,9 @@ public class BCDriver {
                 promotionId = Integer.parseInt(scan.nextLine());
 
                 if (bc.hasPromotion(storeId, promotionId) == -1)
-                    System.out.println("Operation Failed");
-                else 
-                	System.out.println("Operation Succeeded!");
+                    System.out.println("Store does not have that promotion!");
+                else
+                    System.out.println("Store has specified promotion!");
 
                 break;
 
@@ -243,20 +242,37 @@ public class BCDriver {
                 System.out.println("Enter Store Id:");
                 storeId = Integer.parseInt(scan.nextLine());
                 System.out.println("Enter Purchase Time (YYYY-MM-DD):");
-                // date = scan.nextLine();
-                // purchaseTime = new SimpleDateFormat("YYYY-MM-DD").parse(date);
+                date = scan.nextLine();
+                purchaseTime = Date.valueOf(date);
+                coffeeIds = new ArrayList<>();
+                purchaseQuantities = new ArrayList<>();
+                redeemQualities = new ArrayList<>();
 
-                // coffeeIds = new ArrayList();
                 System.out.println("List Coffee Ids (-1 to stop):");
-                // in = scan.nextLine();
-                System.out.println("List Purchase Quantities (csv)");
+                while ((result = scan.nextInt()) != -1) {
+                    coffeeIds.add(result);
+                }
+                in = scan.nextLine();
+
+                System.out.println("List Purchase Quantities (-1 to stop)");
+                while ((result = scan.nextInt()) != -1) {
+                    purchaseQuantities.add(result);
+                }
+                in = scan.nextLine();
+
                 System.out.println("List Redeem Qualities (csv):");
-                result = bc.addPurchase(customerId, storeId, purchaseTime, coffeeIds, purchaseQuantities, redeemQualities);
-                
-                if (result == -1) 
-                	System.out.println("Operation Failed");                
-                else 
-                	System.out.println("Purchase added successfully!");
+                while ((result = scan.nextInt()) != -1) {
+                    redeemQualities.add(result);
+                }
+                in = scan.nextLine();
+
+                result = bc.addPurchase(customerId, storeId, purchaseTime, coffeeIds.subList(0, coffeeIds.size()),
+                        purchaseQuantities, redeemQualities);
+
+                if (result == -1)
+                    System.out.println("Operation Failed");
+                else
+                    System.out.println("Purchase added successfully!");
 
                 break;
 
@@ -264,11 +280,11 @@ public class BCDriver {
                 tempL = bc.getCoffees();
                 if (tempL == null)
                     System.out.println("Error retrieving coffeelist");
-                else if (tempL.isEmpty()) 
-                	System.out.println("No coffees in database");
+                else if (tempL.isEmpty())
+                    System.out.println("No coffees in database");
                 else {
-                	for (Integer i : tempL) 
-                		System.out.println(i);
+                    for (Integer i : tempL)
+                        System.out.println(i);
                 }
                 break;
 
@@ -283,12 +299,12 @@ public class BCDriver {
                 if (tempL == null || tempL.isEmpty())
                     System.out.println("No Coffee Ids Available");
                 else {
-                	for (Integer i : tempL)
-                		System.out.println(i);
+                    for (Integer i : tempL)
+                        System.out.println(i);
                 }
-                    break;
+                break;
 
-                // get customer points
+            // get customer points
             case 12:
                 System.out.println("Enter Customer Id:");
                 customerId = Integer.parseInt(scan.nextLine());
@@ -296,27 +312,24 @@ public class BCDriver {
                 tempD = bc.getPointsByCustomerId(customerId);
 
                 if (tempD == -1)
-                	System.out.println("Error Retrieving Customer Points");
+                    System.out.println("Error Retrieving Customer Points");
                 else
-                	System.out.println(
-                		"Customer " + Integer.toString(customerId) + " Total Points: " +
-                		Double.toString(tempD));
+                    System.out.println(
+                            "Customer " + Integer.toString(customerId) + " Total Points: " + Double.toString(tempD));
+                break;
 
-                // break;
-
-                // get top K stores past X months
+            // get top K stores past X months
             case 13:
                 System.out.println("Enter # Customers: ");
                 k = Integer.parseInt(scan.nextLine());
                 System.out.println("Enter Past # Months: ");
                 x = Integer.parseInt(scan.nextLine());
                 List<Integer> topKStores = bc.getTopKStoresInPastXMonth(k, x);
-                
-                if (topKStores == null || topKStores.isEmpty()) 
-                	System.out.println("Operation Failed or no stores");                
-                else 
-                	System.out.println("Operation Succeeded!");
 
+                if (topKStores == null || topKStores.isEmpty())
+                    System.out.println("Operation Failed or no stores");
+                else
+                    System.out.println("Operation Succeeded!");
                 break;
 
             // get top K customers past X months
@@ -326,18 +339,108 @@ public class BCDriver {
                 System.out.println("Enter Past # Months: ");
                 x = Integer.parseInt(scan.nextLine());
                 List<Integer> topKCustomers = bc.getTopKCustomersInPastXMonth(k, x);
-                
-                if (topKCustomers == null || topKCustomers.isEmpty()) 
-                	System.out.println("Operation Failed or no customers");                
-                else 
-                	System.out.println("Operation Succeeded!");
-                
+
+                if (topKCustomers == null || topKCustomers.isEmpty())
+                    System.out.println("Operation Failed or no customers");
+                else
+                    System.out.println("Operation Succeeded!");
                 break;
+
+            case 15:
+                String line = "";
+                String s[] = null;
+                try {
+                    BufferedReader reader = new BufferedReader(new FileReader("./benchmark.csv"));
+                    while ((line = reader.readLine()) != null) {
+                        s = line.split(",");
+                        if (s[0].equals("memberlevel")) {
+                            result = bc.addMemberLevel(s[1], Double.parseDouble(s[2]));
+                            if (result == -1)
+                                System.out.println("Membership failed to add");
+                            else
+                                System.out.println("Membership added: " + result);
+
+                        }
+                        if (s[0].equals("store")) {
+                            result = bc.addStore(s[1], s[2], s[3], Double.parseDouble(s[4]), Double.parseDouble(s[5]));
+
+                            if (result == -1)
+                                System.out.println("Failed to add Store");
+                            else
+                                System.out.println("Store Successfully Added: " + result);
+
+                        }
+                        if (s[0].equals("coffee")) {
+                            result = bc.addCoffee(s[1], s[2], Integer.parseInt(s[3]), Double.parseDouble(s[4]),
+                                    Double.parseDouble(s[5]), Double.parseDouble(s[6]));
+                            if (result == -1)
+                                System.out.println("Failed to add Coffee");
+                            else
+                                System.out.println("Coffee Successfully Added: " + result);
+
+                        }
+                        if (s[0].equals("offercoffee")) {
+                            if (bc.offerCoffee(Integer.parseInt(s[1]), Integer.parseInt(s[2])) == -1)
+                                System.out.println("Error Offering Coffee");
+                            else
+                                System.out.println("Successfully Offered Coffee!");
+                        }
+                        if (s[0].equals("promotion")) {
+                            bc.addPromotion(s[1], Date.valueOf(s[2]), Date.valueOf(s[3]));
+                        }
+                        if (s[0].equals("promotefor")) {
+                            if (bc.promoteFor(Integer.parseInt(s[1]), Integer.parseInt(s[2])) == -1)
+                                System.out.println("Error Promoting");
+                            else
+                                System.out.println("Successfully Promoting Coffee: " + s[2]);
+                        }
+                        if (s[0].equals("haspromotion")) {
+                            if (bc.hasPromotion(Integer.parseInt(s[1]), Integer.parseInt(s[2])) == -1)
+                                System.out.println("Store does not have that promotion!");
+                            else
+                                System.out.println("Store has specified promotion!");
+                        }
+
+                        if (s[0].equals("customer")) {
+                            result = bc.addCustomer(s[1], s[2], s[3], Integer.parseInt(s[4]), Double.parseDouble(s[5]));
+                            if (result == -1)
+                                System.out.println("Error Adding Customer");
+                            else
+                                System.out.println("Customer Successfully Added: " + result);
+                        }
+                        if (s[0].equals("purchase")) {
+                            bc.addPurchase(Integer.parseInt(s[1]), Integer.parseInt(s[2]), Date.valueOf(s[3]), null,
+                                    null, null);
+                        }
+                        if (s[0].equals("customerid")) {
+                            tempD = bc.getPointsByCustomerId(Integer.parseInt(s[1]));
+
+                            if (tempD == -1)
+                                System.out.println("Error Retrieving Customer Points");
+                            else
+                                System.out.println("Customer " + s[1] + " Total Points: " + Double.toString(tempD));
+                        }
+                        if (s[0].equals("topstores")) {
+                            List<Integer> topS = bc.getTopKStoresInPastXMonth(Integer.parseInt(s[1]),
+                                    Integer.parseInt(s[2]));
+
+                            if (topS == null || topS.isEmpty())
+                                System.out.println("Operation Failed or no stores");
+                            else
+                                System.out.println("Operation Succeeded!");
+
+                        }
+                    }
+                    break;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
             default:
                 System.out.println("Example not found for your entry: " + choice);
                 break;
             }
+
             System.out.println("#########################");
 
         }
