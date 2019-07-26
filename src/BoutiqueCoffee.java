@@ -235,11 +235,10 @@ public class BoutiqueCoffee {
                                 prepStatement.setInt(1, storeId);
                                 prepStatement.setInt(2, i);
                                 rs = prepStatement.executeQuery();
-                                if (rs.next())
+                                if (!rs.next()) {
                                         System.out.println("Coffee Does Not Exist @ Specified Store");
-                                else
                                         return -1;
-
+                                }
                         }
 
                         // get reward points/redeem points from coffee
