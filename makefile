@@ -10,10 +10,10 @@ all:
 	mkdir -p ./src/jar
 	cd ./src/jar && wget -N $(JAR)
 	$(JC) $(JFLAGS) -d './build' src/*.java
-
+	cp benchmark.csv ./build/benchmark.csv
 clean:
 	rm -r build
 	rm -r src/jar
 
 ft:
-	cd build && java $(JFLAGS2) Driver
+	cd build && java $(JFLAGS2) BCDriver

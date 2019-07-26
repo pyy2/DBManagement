@@ -1,0 +1,721 @@
+store,Silverback Pitt,567 Nicolls Ave,Grab-and-Go,57.11,33.78
+store,Name Pitt,9013 Cemetery Ave,Restaurant,97.85,5.59
+store,Bullseye Pitt,9 Southampton Ave,Cafe,16.58,87.19
+store,Engage Pitt,351 Rockcrest Ave,Grab-and-Go,21.22,33.54
+store,Sacred Pitt,50 South 6th St,Corporate,74.57,22.59
+store,Aero Pitt,29 West Grant Rd,Grab-and-Go,42.60,74.21
+store,Sketch Pitt,12 State Dr,Restaurant,42.7,18.21
+store,Mantra Pitt,9714 E. Ryan St,Old House,22.68,43.94
+store,Conceptual Pitt,455 Center Lane,Cafe,49.46,1.90
+store,Almond Pitt,9185 Hanover St,Restaurant,7.36,93.67
+store,Elements Pitt,632 Honey  Rd,Corporate,87.30,76.83
+store,Worldwide Pitt,34  Military Rd,Restaurant,91.33,34.45
+store,Inferno Pitt,26 Taylor Dr.,Old House,93.82,17.15
+store,Proxy Pitt,93 Del Monte Lane,Corporate,58.81,77.11
+store,Goliath Pitt,66 Bohemia St,Old House,26.31,50.48
+store,Presentation Pitt,856 Harrison St,Old House,75.12,47.33
+store,ster Pitt,514 North Ridge St,Restaurant,1.32,35.35
+store,Corner Pitt,7926 Miles Lane,Old House,85.28,14.52
+store,WildWest Pitt,9215 Glen Ridge Rd,Old House,22.13,49.3
+store,RedHot Pitt,7399 Homestead Dr,Cafe,82.14,65.22
+store,Pitt Cast,403 Sycamore Lane,Cafe,87.49,46.64
+store,Strategies Pitt,219 Longbranch Dr,Cafe,82.64,29.37
+store,Aztec Pitt,26 Beach St,Old House,14.71,95.7
+store,Topics Pitt,8950 Oklahoma Ave,Old House,25.29,40.70
+store,IO Pitt,8007 Bishop Ave,Cafe,44.29,63.42
+store,Einstein Pitt,16 Talbot St,Corporate,98.12,7.86
+store,Spicy Pitt,8641 Heritage St,Old House,4.99,12.96
+store,Nobel Pitt,40 Pleasant Dr,Grab-and-Go,73.72,74.2
+store,Right Pitt,8190 Rock Maple Dr,Restaurant,8.45,59.18
+store,Convergent Pitt,23 Creekside Dr,Corporate,43.88,85.68
+store,Starboard Pitt,8 Cedarwood Ave,Old House,38.61,10.21
+store,Captive Pitt,4 Trenton Dr,Grab-and-Go,10.73,2.49
+store,Crush Pitt,15 Orange St,Corporate,44.66,2.53
+store,Vibes Pitt,7246B Rockaway Dr,Grab-and-Go,1.78,54.28
+store,Angus Pitt,55 Glen Ave,Cafe,81.97,17.8
+store,Pitt Define,9405 W. Arch Rd,Old House,62.0,76.16
+store,Pitt Fly,2 Bayberry St,Restaurant,10.4,78.34
+store,Optimum Pitt,7028 Pine St,Old House,14.31,9.72
+store,Townsend Pitt,49 53rd Ave,Old House,32.84,76.4
+store,Broadway Pitt,9394 South St,Corporate,14.13,10.66
+store,Polaris Pitt,3 Monroe St,Old House,71.5,23.81
+store,Vet Pitt,8240 Union Dr,Restaurant,87.70,90.23
+store,Toucan Pitt,40 Thomas St,Restaurant,99.17,14.82
+store,Forward Pitt,97 Lilac Ave,Cafe,88.29,88.91
+store,Trinity Pitt,9 Bedford Dr,Restaurant,24.17,54.74
+store,Camel Pitt,52 Mill St,Corporate,84.9,40.93
+store,Indigo Pitt,51 Manchester St,Corporate,62.0,58.79
+store,Optimized Pitt,8137 Harrison St,Corporate,40.73,34.68
+store,Hello World,493 Trusel St,Cafe,3.69,12.46
+store,Dunkin Donuts,8420 Inverness Dr,Corporate,56.59,1.7
+coffeeAroma Mocha,Ristretto,5,9.71,1.69,0.33
+coffeeGrinders Cafe,French press,6,6.9,2.89,3.64
+coffeeSteamy Coffee,Turkish,1,0.88,3.78,3.43
+coffeeBaristas,Cubano,2,0.93,4.3,0.18
+coffeeGround Up Cafe,Percolated,2,7.95,0.15,0.84
+coffeeTatianas Cafe,Turkish,9,5.55,1.24,3.1
+coffeeBeans Cafe,Manilo,8,7.61,1.88,1.23
+coffeeHuggaMug Cafe,crema,2,5.14,4.5,1.95
+coffeeBusy Bean,null,3,1.66,2.22,2.22
+coffeeBeany Business,Turkish,3,0.9,1.61,0.34
+coffeeImpresso Espresso,Turkish,10,0.28,3.75,2.76
+coffeeCoffee Club,Ristretto,2,0.50,0.51,1.93
+coffeeBoston Barista,Percolated,5,8.41,1.20,4.95
+coffeeJacked Up Coffee,Cold brew,1,2.28,4.94,4.90
+coffeeFamily Bean,Guillermo,9,0.89,0.97,0.9
+coffeeClub Coffee,Zorro,2,9.69,0.59,2.81
+coffeeJumpin Beans,Americano,9,2.64,4.36,4.66
+coffeeFriendly Bean,crema,2,6.4,3.25,0.38
+coffeeCoffee Express,Lungo,2,2.43,3.0,1.83
+coffeeJumpstart,Moka,1,3.40,4.64,0.85
+coffeeGrind,Cold brew,6,6.99,3.50,2.35
+coffeeCoffee House,crema,10,3.49,3.12,0.49
+coffeeLava Java,Espresso,5,1.8,1.23,1.25
+coffeeHideout,Ristretto,4,4.37,3.74,3.40
+coffeeCoffee Time,Moka,10,9.62,1.91,1.43
+coffeeManhattan Mocha,Guillermo,6,3.55,1.30,3.60
+coffeeRoasted Bean,Cold brew,6,5.62,3.78,1.60
+coffeeCup o Joe,Percolated,8,4.53,3.93,1.87
+coffeeMugs Coffee,Americano,7,8.57,0.13,0.33
+coffeeSplit Bean,Americano,5,6.34,2.63,2.98
+coffeeDream Bean,Zorro,6,3.66,3.29,3.15
+coffeeNo Doze,Guillermo,7,2.75,0.61,1.89
+coffeeSteam Room,Americano,9,4.96,1.10,3.62
+coffeeEspresso Cafe,Espresso,10,1.30,3.84,4.99
+coffeeScreamin Beans,Lungo,2,9.44,0.72,1.86
+coffeeTopped Off,Guillermo,5,5.37,0.98,0.35
+coffeeEspresso,Americano,1,0.62,0.21,2.85
+coffeeSpiced Chai,crema,1,9.7,4.43,1.4
+coffeeWake Up,Lungo,4,2.0,0.99,0.58
+coffeeExpresso,Cubano,1,8.54,1.29,4.15
+coffeeSteam Beans,Ristretto,5,1.77,2.86,4.94
+coffeeWide Awake,Lungo,10,9.13,2.62,2.60
+coffeeGrind House,Ristretto,3,8.22,3.91,3.58
+coffeeSteamin Mugs,Lungo,3,2.17,1.57,2.76
+coffeeYo Jo Coffee ,Americano,7,6.59,4.49,2.14
+offercoffee,1,8
+offercoffee,1,27
+offercoffee,1,29
+offercoffee,1,25
+offercoffee,2,27
+offercoffee,3,41
+offercoffee,3,12
+offercoffee,3,36
+offercoffee,3,15
+offercoffee,3,29
+offercoffee,3,1
+offercoffee,3,36
+offercoffee,3,25
+offercoffee,3,3
+offercoffee,3,37
+offercoffee,4,31
+offercoffee,4,39
+offercoffee,4,1
+offercoffee,4,15
+offercoffee,4,37
+offercoffee,5,38
+offercoffee,5,37
+offercoffee,5,5
+offercoffee,5,8
+offercoffee,5,37
+offercoffee,5,23
+offercoffee,5,26
+offercoffee,6,35
+offercoffee,6,39
+offercoffee,6,15
+offercoffee,6,12
+offercoffee,6,27
+offercoffee,6,38
+offercoffee,6,24
+offercoffee,6,36
+offercoffee,6,6
+offercoffee,6,36
+offercoffee,7,43
+offercoffee,7,4
+offercoffee,7,15
+offercoffee,7,4
+offercoffee,7,14
+offercoffee,7,23
+offercoffee,7,43
+offercoffee,7,15
+offercoffee,7,31
+offercoffee,8,34
+offercoffee,8,40
+offercoffee,8,39
+offercoffee,8,23
+offercoffee,8,40
+offercoffee,8,40
+offercoffee,8,35
+offercoffee,8,43
+offercoffee,8,41
+offercoffee,9,27
+offercoffee,9,6
+offercoffee,9,15
+offercoffee,9,34
+offercoffee,9,33
+offercoffee,9,25
+offercoffee,9,37
+offercoffee,9,6
+offercoffee,9,37
+offercoffee,9,26
+offercoffee,10,10
+offercoffee,10,23
+offercoffee,10,3
+offercoffee,10,30
+offercoffee,10,42
+offercoffee,10,17
+offercoffee,11,25
+offercoffee,11,29
+offercoffee,11,15
+offercoffee,11,43
+offercoffee,11,43
+offercoffee,11,29
+offercoffee,11,33
+offercoffee,11,31
+offercoffee,12,30
+offercoffee,12,26
+offercoffee,13,4
+offercoffee,13,19
+offercoffee,13,8
+offercoffee,13,31
+offercoffee,13,25
+offercoffee,13,18
+offercoffee,13,19
+offercoffee,13,28
+offercoffee,14,26
+offercoffee,14,35
+offercoffee,14,13
+offercoffee,14,44
+offercoffee,15,4
+offercoffee,15,19
+offercoffee,15,38
+offercoffee,15,36
+offercoffee,15,3
+offercoffee,15,22
+offercoffee,15,15
+offercoffee,15,19
+offercoffee,16,20
+offercoffee,17,21
+offercoffee,17,42
+offercoffee,17,14
+offercoffee,17,37
+offercoffee,17,27
+offercoffee,17,25
+offercoffee,17,24
+offercoffee,18,37
+offercoffee,18,30
+offercoffee,18,5
+offercoffee,18,19
+offercoffee,19,2
+offercoffee,19,6
+offercoffee,19,41
+offercoffee,19,24
+offercoffee,19,14
+offercoffee,19,29
+offercoffee,19,28
+offercoffee,19,26
+offercoffee,19,45
+offercoffee,20,1
+offercoffee,20,12
+offercoffee,20,45
+offercoffee,20,45
+offercoffee,20,33
+offercoffee,20,19
+offercoffee,20,40
+offercoffee,20,22
+offercoffee,20,45
+offercoffee,20,35
+offercoffee,21,34
+offercoffee,21,1
+offercoffee,21,5
+offercoffee,21,14
+offercoffee,21,8
+offercoffee,21,27
+offercoffee,21,43
+offercoffee,22,45
+offercoffee,22,18
+offercoffee,22,4
+offercoffee,22,20
+offercoffee,22,37
+offercoffee,22,9
+offercoffee,22,34
+offercoffee,22,31
+offercoffee,22,39
+offercoffee,22,10
+offercoffee,23,34
+offercoffee,23,5
+offercoffee,23,36
+offercoffee,24,11
+offercoffee,24,13
+offercoffee,24,14
+offercoffee,24,36
+offercoffee,24,1
+offercoffee,24,14
+offercoffee,25,34
+offercoffee,25,21
+offercoffee,25,28
+offercoffee,25,16
+offercoffee,25,38
+offercoffee,25,18
+offercoffee,26,26
+offercoffee,26,12
+offercoffee,26,26
+offercoffee,26,10
+offercoffee,26,4
+offercoffee,26,35
+offercoffee,26,16
+offercoffee,26,29
+offercoffee,26,38
+offercoffee,26,14
+offercoffee,27,23
+offercoffee,27,11
+offercoffee,27,23
+offercoffee,27,26
+offercoffee,27,42
+offercoffee,27,2
+offercoffee,27,34
+offercoffee,28,26
+offercoffee,28,13
+offercoffee,28,41
+offercoffee,28,23
+offercoffee,28,31
+offercoffee,29,23
+offercoffee,29,28
+offercoffee,29,3
+offercoffee,30,21
+offercoffee,31,17
+offercoffee,31,15
+offercoffee,31,10
+offercoffee,31,30
+offercoffee,31,18
+offercoffee,31,39
+offercoffee,31,1
+offercoffee,31,34
+offercoffee,31,21
+offercoffee,31,4
+offercoffee,32,7
+offercoffee,32,37
+offercoffee,32,10
+offercoffee,32,42
+offercoffee,32,8
+offercoffee,32,8
+offercoffee,33,16
+offercoffee,33,18
+offercoffee,33,25
+offercoffee,33,36
+offercoffee,33,16
+offercoffee,33,30
+offercoffee,33,42
+offercoffee,34,18
+offercoffee,34,17
+offercoffee,34,23
+offercoffee,34,18
+offercoffee,34,30
+offercoffee,34,41
+offercoffee,34,7
+offercoffee,34,31
+offercoffee,35,4
+offercoffee,35,29
+offercoffee,35,41
+offercoffee,35,20
+offercoffee,36,35
+offercoffee,36,44
+offercoffee,36,13
+offercoffee,36,35
+offercoffee,36,26
+offercoffee,36,41
+offercoffee,36,15
+offercoffee,36,31
+offercoffee,36,12
+offercoffee,37,16
+offercoffee,37,30
+offercoffee,37,10
+offercoffee,37,26
+offercoffee,37,4
+offercoffee,38,43
+offercoffee,38,25
+offercoffee,38,11
+offercoffee,38,20
+offercoffee,39,7
+offercoffee,39,40
+offercoffee,39,28
+offercoffee,39,29
+offercoffee,39,39
+offercoffee,40,27
+offercoffee,40,5
+offercoffee,40,37
+offercoffee,40,11
+offercoffee,40,43
+offercoffee,40,10
+offercoffee,40,22
+offercoffee,40,19
+offercoffee,41,6
+offercoffee,41,38
+offercoffee,41,31
+offercoffee,41,34
+offercoffee,41,26
+offercoffee,42,29
+offercoffee,42,32
+offercoffee,42,38
+offercoffee,42,17
+offercoffee,42,20
+offercoffee,42,27
+offercoffee,42,29
+offercoffee,42,22
+offercoffee,43,23
+offercoffee,43,12
+offercoffee,43,30
+offercoffee,43,29
+offercoffee,43,43
+offercoffee,43,27
+offercoffee,44,35
+offercoffee,44,25
+offercoffee,44,10
+offercoffee,44,45
+offercoffee,44,43
+offercoffee,44,6
+offercoffee,44,22
+offercoffee,44,30
+offercoffee,44,5
+offercoffee,45,20
+offercoffee,45,7
+offercoffee,45,11
+offercoffee,45,32
+offercoffee,45,30
+offercoffee,45,33
+offercoffee,45,26
+offercoffee,45,16
+offercoffee,45,11
+offercoffee,46,11
+offercoffee,46,13
+offercoffee,46,23
+offercoffee,46,27
+offercoffee,46,43
+offercoffee,46,29
+offercoffee,47,37
+offercoffee,47,8
+offercoffee,47,24
+offercoffee,47,30
+offercoffee,47,21
+offercoffee,48,45
+offercoffee,48,5
+offercoffee,48,26
+offercoffee,48,28
+offercoffee,48,5
+offercoffee,48,25
+offercoffee,48,36
+offercoffee,48,19
+offercoffee,48,24
+offercoffee,48,30
+offercoffee,49,33
+offercoffee,49,32
+offercoffee,49,34
+offercoffee,49,39
+offercoffee,50,29
+offercoffee,50,33
+offercoffee,50,36
+offercoffee,50,12
+offercoffee,50,35
+offercoffee,50,5
+offercoffee,50,11
+offercoffee,50,40
+promotion,uH4,2018-12-24,2016-9-12
+promotion,WsM,2017-1-11,2018-4-19
+promotion,iGK,2017-4-24,2016-2-17
+promotion,SSq,2017-10-23,2017-1-27
+promotion,mm0,2018-7-8,2018-7-17
+promotion,L6m,2016-11-14,2017-8-23
+promotion,UvF,2018-7-9,2016-8-19
+promotion,2fx,2018-11-7,2017-8-16
+promotion,tAJ,2018-7-2,2018-8-20
+promotion,eOX,2018-7-10,2016-11-10
+promotion,BoK,2018-3-28,2017-5-18
+promotion,ncK,2016-4-18,2018-7-5
+promotion,gd3,2017-4-24,2016-7-27
+promotion,Y3F,2017-8-22,2017-11-4
+promotion,sdb,2017-8-1,2016-3-11
+promotion,XSy,2016-5-19,2016-12-2
+promotion,seH,2017-8-24,2017-12-12
+promotion,8Un,2018-5-11,2016-3-17
+promotion,Xcc,2017-10-12,2018-1-15
+promotion,DIZ,2016-2-24,2017-3-28
+promotion,KOp,2018-7-11,2018-6-18
+promotion,oCz,2016-10-2,2017-3-24
+promotion,NHn,2018-9-27,2016-5-3
+promotion,hNu,2017-4-17,2017-6-18
+promotion,4CI,2016-10-24,2018-2-16
+promotefor,15,12
+promotefor,18,26
+promotefor,19,2
+promotefor,23,26
+promotefor,22,15
+promotefor,17,14
+promotefor,12,33
+promotefor,16,16
+promotefor,15,13
+promotefor,22,10
+promotefor,21,26
+promotefor,4,10
+promotefor,4,34
+promotefor,6,1
+promotefor,7,18
+promotefor,23,29
+promotefor,8,26
+promotefor,6,43
+promotefor,6,20
+promotefor,21,22
+promotefor,24,26
+promotefor,3,32
+promotefor,4,26
+promotefor,14,2
+promotefor,13,7
+customer,Cecilia,Kopecky,Cecilia@pitt.edu,4,653
+customer,Clinton,Class,Clinton@pitt.edu,2,367
+customer,Kassandra,Greenwalt,Kassandra@pitt.edu,5,404
+customer,Keturah,Depaz,Keturah@pitt.edu,4,534
+customer,Fletcher,Sockwell,Fletcher@pitt.edu,2,381
+customer,Peter,Burkhalter,Peter@pitt.edu,5,358
+customer,Cassondra,Palma,Cassondra@pitt.edu,1,536
+customer,Marco,Caggiano,Marco@pitt.edu,5,385
+customer,Brook,Ivery,Brook@pitt.edu,3,45
+customer,Colin,Bobb,Colin@pitt.edu,1,897
+customer,Roseanne,Trombly,Roseanne@pitt.edu,1,103
+customer,Rudolph,Mcnett,Rudolph@pitt.edu,5,21
+customer,Leslie,Ines,Leslie@pitt.edu,2,165
+customer,Murray,Blossom,Murray@pitt.edu,4,247
+customer,Allison,Hines,Allison@pitt.edu,1,582
+customer,Florentina,Lopez,Florentina@pitt.edu,4,444
+customer,Imelda,Gilder,Imelda@pitt.edu,5,193
+customer,Gianna,Henline,Gianna@pitt.edu,5,743
+customer,Carey,Winburn,Carey@pitt.edu,4,566
+customer,Margarito,Tietjen,Margarito@pitt.edu,3,994
+customer,Mellisa,Hoye,Mellisa@pitt.edu,3,803
+customer,Monet,Coghlan,Monet@pitt.edu,1,234
+customer,Nilsa,Arney,Nilsa@pitt.edu,5,511
+customer,Anya,Alberti,Anya@pitt.edu,2,85
+customer,Felipe,Scogin,Felipe@pitt.edu,3,589
+customer,Albina,Polly,Albina@pitt.edu,3,467
+customer,Desmond,Steil,Desmond@pitt.edu,4,278
+customer,Zulma,Deese,Zulma@pitt.edu,5,942
+customer,Tameka,Kazmierczak,Tameka@pitt.edu,3,206
+customer,Carlotta,Hintze,Carlotta@pitt.edu,1,544
+customer,Tianna,Huckins,Tianna@pitt.edu,1,121
+customer,Many,Purington,Many@pitt.edu,4,952
+customer,Louise,Pattillo,Louise@pitt.edu,1,841
+customer,Graciela,Organ,Graciela@pitt.edu,3,640
+customer,Ingeborg,Ducharme,Ingeborg@pitt.edu,4,423
+customer,Sook,Carrington,Sook@pitt.edu,4,69
+customer,Eugenia,Icenhour,Eugenia@pitt.edu,2,19
+customer,Stephnie,Rape,Stephnie@pitt.edu,2,12
+customer,Leigha,Mazzotta,Leigha@pitt.edu,5,962
+customer,Keli,Grant,Keli@pitt.edu,3,270
+customer,Tresa,Sheilds,Tresa@pitt.edu,3,732
+customer,Madge,Hillsman,Madge@pitt.edu,1,584
+customer,Gregg,Hartman,Gregg@pitt.edu,4,702
+customer,Debora,Slaughter,Debora@pitt.edu,2,705
+customer,Talia,Townsend,Talia@pitt.edu,4,322
+customer,Libby,Krebbs,Libby@pitt.edu,4,672
+customer,Alysia,Vandervoort,Alysia@pitt.edu,3,953
+customer,Imogene,Guillory,Imogene@pitt.edu,4,954
+customer,Ettie,Bainter,Ettie@pitt.edu,1,467
+customer,Dante,Vallance,Dante@pitt.edu,3,301
+purchase,24,50,2016-2-4
+purchase,10,18,2017-5-10
+purchase,16,18,2017-6-30
+purchase,36,44,2018-7-19
+purchase,2,17,2018-2-4
+purchase,25,20,2016-9-10
+purchase,9,29,2017-3-1
+purchase,32,4,2018-6-3
+purchase,10,31,2017-9-22
+purchase,40,8,2016-7-22
+purchase,22,38,2018-11-19
+purchase,40,15,2017-9-7
+purchase,25,46,2017-12-24
+purchase,39,19,2018-11-10
+purchase,22,24,2017-8-23
+purchase,31,25,2016-2-10
+purchase,32,22,2016-3-21
+purchase,46,47,2018-3-16
+purchase,23,37,2017-12-16
+purchase,8,28,2017-7-9
+purchase,4,7,2017-4-30
+purchase,2,15,2018-4-11
+purchase,12,16,2017-11-16
+purchase,32,23,2017-3-6
+purchase,1,15,2018-5-18
+purchase,10,30,2018-10-20
+purchase,23,10,2017-5-8
+purchase,17,47,2018-3-2
+purchase,1,5,2018-7-16
+purchase,28,38,2016-4-18
+purchase,12,46,2018-12-12
+purchase,11,25,2016-9-16
+purchase,21,9,2016-4-11
+purchase,29,26,2018-7-27
+purchase,48,45,2018-7-30
+purchase,21,6,2018-12-21
+purchase,34,28,2018-6-13
+purchase,32,9,2017-12-25
+purchase,34,7,2018-6-30
+purchase,17,15,2016-7-18
+purchase,19,29,2016-11-8
+purchase,11,10,2018-6-11
+purchase,41,4,2017-4-4
+purchase,12,18,2017-3-15
+purchase,4,31,2016-11-13
+purchase,49,48,2016-11-30
+purchase,37,34,2016-7-13
+purchase,27,8,2017-11-26
+purchase,12,7,2018-12-19
+purchase,37,9,2016-7-19
+purchase,18,4,2016-2-23
+purchase,9,38,2017-11-17
+purchase,22,37,2017-9-28
+purchase,25,49,2016-7-27
+purchase,43,49,2018-7-15
+purchase,31,7,2016-6-19
+purchase,32,47,2017-8-8
+purchase,35,8,2016-11-6
+purchase,11,12,2018-3-3
+purchase,36,40,2017-10-8
+purchase,49,48,2016-2-13
+purchase,13,19,2016-2-30
+purchase,26,23,2016-9-11
+purchase,29,28,2018-11-20
+purchase,47,48,2016-12-17
+purchase,26,49,2018-11-20
+purchase,23,21,2016-12-24
+purchase,45,37,2018-7-13
+purchase,49,22,2017-4-10
+purchase,35,13,2016-8-26
+purchase,36,15,2018-5-20
+purchase,36,30,2017-8-10
+purchase,10,21,2018-10-27
+purchase,44,9,2018-1-23
+purchase,7,32,2018-8-13
+purchase,7,44,2017-12-13
+purchase,31,7,2016-12-23
+purchase,11,27,2017-8-3
+purchase,32,30,2016-6-22
+purchase,40,5,2016-3-21
+purchase,30,30,2018-12-30
+purchase,12,40,2016-4-16
+purchase,43,9,2016-5-9
+purchase,11,7,2016-11-29
+purchase,5,50,2016-1-7
+purchase,25,49,2016-9-25
+purchase,46,48,2017-12-19
+purchase,38,22,2018-12-28
+purchase,14,26,2018-9-24
+purchase,3,20,2016-5-6
+purchase,18,34,2017-3-23
+purchase,28,31,2016-7-25
+purchase,41,35,2017-2-27
+purchase,20,17,2016-8-23
+purchase,41,47,2017-11-16
+purchase,29,32,2018-1-10
+purchase,35,48,2018-12-26
+purchase,17,30,2018-5-1
+purchase,13,26,2018-6-18
+purchase,25,43,2018-10-11
+purchase,19,12,2017-12-11
+purchase,2,23,2016-10-10
+purchase,29,32,2017-2-7
+purchase,34,27,2018-4-9
+purchase,15,47,2016-8-10
+purchase,30,3,2016-7-18
+purchase,20,8,2017-12-5
+purchase,37,12,2017-10-17
+purchase,42,9,2016-7-21
+purchase,40,32,2017-12-21
+purchase,30,29,2016-1-26
+purchase,14,11,2018-4-16
+purchase,1,5,2016-6-1
+purchase,30,35,2016-1-20
+purchase,7,1,2017-12-30
+purchase,17,14,2017-5-3
+purchase,43,45,2017-5-14
+purchase,20,23,2017-6-21
+purchase,25,42,2016-7-10
+purchase,16,34,2017-9-24
+purchase,24,10,2016-5-3
+purchase,12,43,2017-12-1
+purchase,25,9,2016-12-16
+purchase,37,22,2016-2-7
+purchase,35,1,2018-11-19
+purchase,50,7,2017-6-25
+purchase,8,11,2017-3-5
+purchase,23,12,2017-7-22
+purchase,25,32,2018-2-29
+purchase,45,48,2018-3-3
+purchase,48,42,2018-11-4
+purchase,31,33,2017-3-11
+purchase,27,14,2018-9-19
+purchase,43,39,2016-12-23
+purchase,11,10,2017-11-21
+purchase,45,16,2017-8-13
+purchase,31,47,2017-8-7
+purchase,18,34,2017-1-14
+purchase,29,17,2017-7-16
+purchase,34,35,2018-11-1
+purchase,1,5,2018-2-9
+purchase,50,26,2016-9-29
+purchase,35,31,2017-3-8
+purchase,26,3,2018-12-17
+purchase,38,8,2017-8-2
+purchase,30,1,2016-7-11
+purchase,11,29,2016-12-29
+purchase,44,36,2017-3-28
+purchase,1,1,2018-9-10
+purchase,6,2,2017-6-6
+purchase,42,13,2017-6-2
+purchase,27,5,2018-2-30
+purchase,5,5,2017-1-21
+purchase,33,14,2017-1-19
+purchase,40,1,2016-6-22
+purchase,34,12,2018-10-7
+purchase,3,33,2017-12-1
+purchase,23,26,2016-12-1
+purchase,36,50,2017-5-1
+purchase,20,40,2017-10-30
+purchase,40,44,2016-9-5
+purchase,13,41,2017-10-19
+purchase,12,42,2017-2-9
+purchase,28,1,2017-3-10
+purchase,22,39,2017-8-18
+purchase,22,25,2016-7-3
+purchase,13,25,2018-2-20
+purchase,13,31,2018-10-19
+purchase,30,31,2018-10-9
+purchase,49,4,2017-3-30
+purchase,47,29,2017-10-17
+purchase,34,1,2018-7-8
+purchase,24,44,2017-3-21
+purchase,13,13,2016-1-28
+purchase,35,19,2018-6-6
+purchase,22,15,2018-6-17
+purchase,44,35,2018-6-3
+purchase,18,20,2018-2-29
+purchase,9,30,2016-4-13
+purchase,42,32,2017-2-26
+purchase,25,40,2016-4-1
+purchase,49,35,2016-5-29
+purchase,8,14,2016-10-22
+purchase,39,37,2017-2-8
+purchase,18,36,2018-2-11
+purchase,20,31,2017-4-13
+purchase,27,12,2016-2-20
+purchase,25,20,2018-9-23
+purchase,31,41,2016-2-22
+purchase,1,5,2018-2-27
+purchase,14,17,2016-1-28
+purchase,12,21,2016-1-24
+purchase,27,46,2018-10-4
+purchase,1,11,2018-8-2
+purchase,25,12,2017-8-23
+purchase,29,14,2017-6-17
+purchase,4,24,2018-5-9
+purchase,45,6,2017-11-3
+purchase,4,18,2017-8-7
+purchase,4,26,2017-1-11

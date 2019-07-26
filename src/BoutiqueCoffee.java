@@ -12,6 +12,7 @@ public class BoutiqueCoffee {
         private PreparedStatement prepStatement; // used to create a prepared statement, that will be later reused
         private ResultSet rs; // used to hold the result of your query (if one exists)
         private String query; // this will hold the query we are using
+        private int result;
 
         public BoutiqueCoffee(String username, String password) {
                 scan = new Scanner(System.in);
@@ -20,13 +21,10 @@ public class BoutiqueCoffee {
                 prepStatement = null;
                 rs = null;
                 query = "";
+                result = -1;
 
                 try {
-                        // Class.forName("org.postgresql.Driver");
-
-                        String url = "jdbc:postgresql://localhost:5432/postgres/cs1555project";
-
-
+                        String url = "jdbc:postgresql://localhost:5432/";
                         Properties props = new Properties();
                         System.out.println("Connecting to Postgres...");
                         props.setProperty("user", username);
@@ -41,7 +39,6 @@ public class BoutiqueCoffee {
         // @return the auto-generated ID of this store or -1 if the operation is not
         // possible or failed
         public int addStore(String name, String address, String storeType, double gpsLong, double gpsLat) {
-                int result = -1;
                 try {
                         query = "INSERT INTO store (\"store_id\",\"name\", \"address\", \"store_type\", \"gps_long\", \"gps_lat\") VALUES (DEFAULT,?,?,?,?,?) RETURNING store_id";
                         prepStatement = connection.prepareStatement(query);
@@ -55,18 +52,17 @@ public class BoutiqueCoffee {
                         if (rs.next()) {
                                 result = rs.getInt(1);
                         }
+                        return result;
 
                 } catch (Exception e) {
-                        e.printStackTrace();
+                        return -1;
                 }
-                return result;
         }
 
         // @return the auto-generated ID of this coffee or -1 if the operation is not
         // possible or failed
         public int addCoffee(String name, String description, int intensity, double price, double rewardPoints,
                         double redeemPoints) {
-                int result = -1;
                 try {
                         query = "INSERT INTO coffee (\"coffee_id\", \"name\", \"description\", \"intensity\", \"price\", \"reward_points\", \"redeem_points\") VALUES (DEFAULT,?,?,?,?,?,?) RETURNING coffee_id";
                         prepStatement = connection.prepareStatement(query);
@@ -81,33 +77,30 @@ public class BoutiqueCoffee {
                         if (rs.next()) {
                                 result = rs.getInt(1);
                         }
+                        return result;
                 } catch (Exception e) {
-                        e.printStackTrace();
+                        return -1;
                 }
-                return result;
         }
 
         // @return 1 if the operation succeeded or -1 if the operation is not possible
         // or failed
         public int offerCoffee(int storeId, int coffeeId) {
-                int result = -1;
                 try {
                         query = "INSERT INTO offercoffee VALUES (?,?)";
                         prepStatement = connection.prepareStatement(query);
                         prepStatement.setInt(1, storeId);
                         prepStatement.setInt(2, coffeeId);
                         prepStatement.executeUpdate();
-                        result = 1;
+                        return 1;
                 } catch (Exception e) {
-                        e.printStackTrace();
+                        return -1;
                 }
-                return result;
         }
 
         // @return the auto-generated ID of this promotion or -1 if the operation is not
         // possible or failed
         public int addPromotion(String name, Date startDate, Date endDate) {
-                int result = -1;
                 try {
                         query = "INSERT INTO promotion (\"promotion_id\", \"name\", \"start_date\", \"end_date\") VALUES (DEFAULT,?,?,?) RETURNING promotion_id";
                         prepStatement = connection.prepareStatement(query);
@@ -119,44 +112,55 @@ public class BoutiqueCoffee {
                         if (rs.next()) {
                                 result = rs.getInt(1);
                         }
+                        return result;
                 } catch (Exception e) {
-                        e.printStackTrace();
+                        return -1;
                 }
-                return result;
         }
 
         // @return 1 if the operation succeeded or -1 if the operation is not possible
         // or failed
         public int promoteFor(int promotionId, int coffeeId) {
-                int result = -1;
                 try {
                         query = "INSERT INTO promotefor VALUES (?,?)";
                         prepStatement = connection.prepareStatement(query);
                         prepStatement.setInt(1, promotionId);
                         prepStatement.setInt(2, coffeeId);
                         prepStatement.executeUpdate();
-                        result = 1;
+
+                        query = "select store_id, promotion_id from offerCoffee NATURAL JOIN promoteFor EXCEPT SELECT * FROM haspromotion";
+                        prepStatement = connection.prepareStatement(query);
+                        rs = prepStatement.executeQuery();
+                        while (rs.next()) {
+                                query = "INSERT INTO haspromotion VALUES (?,?)";
+                                prepStatement = connection.prepareStatement(query);
+                                prepStatement.setInt(1, rs.getInt(1));
+                                prepStatement.setInt(2, rs.getInt(2));
+                                prepStatement.executeUpdate();
+                        }
+                        return 1;
                 } catch (Exception e) {
-                        e.printStackTrace();
+                        return -1;
                 }
-                return result;
         }
 
         // @return 1 if the operation succeeded or -1 if the operation is not possible
         // or failed
         public int hasPromotion(int storeId, int promotionId) {
-                int result = -1;
                 try {
-                        query = "INSERT INTO haspromotion VALUES (?,?)";
+                        query = "SELECT * FROM haspromotion WHERE store_Id = ? AND promotion_id = ?";
                         prepStatement = connection.prepareStatement(query);
                         prepStatement.setInt(1, storeId);
                         prepStatement.setInt(2, promotionId);
-                        prepStatement.executeUpdate();
-                        result = 1;
+                        rs = prepStatement.executeQuery();
+
+                        if (rs.next())
+                                return 1;
+                        else
+                                return -1;
                 } catch (Exception e) {
-                        e.printStackTrace();
+                        return -1;
                 }
-                return result;
         }
 
         // @return the auto-generated ID of this member level or -1 if the operation is
@@ -173,10 +177,10 @@ public class BoutiqueCoffee {
                         if (rs.next()) {
                                 result = rs.getInt(1);
                         }
+                        return result;
                 } catch (Exception e) {
-                        e.printStackTrace();
+                        return -1;
                 }
-                return result;
         }
 
         // @return the auto-generated ID of this customer or -1 if the operation is not
@@ -197,10 +201,10 @@ public class BoutiqueCoffee {
                         if (rs.next()) {
                                 result = rs.getInt(1);
                         }
+                        return result;
                 } catch (Exception e) {
-                        e.printStackTrace();
+                        return -1;
                 }
-                return result;
         }
 
         // @param coffeeIds - ID’s of the coffees being bought by this purchase
@@ -215,12 +219,102 @@ public class BoutiqueCoffee {
         public int addPurchase(int customerId, int storeId, Date purchaseTime, List<Integer> coffeeIds,
                         List<Integer> purchaseQuantities, List<Integer> redeemQuantities) {
                 int result = -1;
+                List<Double> addPoints = new ArrayList<>();
+                List<Double> subPoints = new ArrayList<>();
+
                 try {
+                        // check 1 to 1 mapping
                         if (coffeeIds.size() != purchaseQuantities.size())
                                 throw new IllegalArgumentException();
-                        else if (coffeeIds.size() != redeemQuantities.size())
+                        if (coffeeIds.size() != redeemQuantities.size())
                                 throw new IllegalArgumentException();
 
+                        // make sure store offers specified coffees
+                        for (int i : coffeeIds) {
+                                query = "SELECT * FROM offercoffee WHERE store_Id = ? AND coffee_Id = ?";
+                                prepStatement = connection.prepareStatement(query);
+                                prepStatement.setInt(1, storeId);
+                                prepStatement.setInt(2, i);
+                                rs = prepStatement.executeQuery();
+                                if (rs.next() == false) {
+                                        System.out.println("Coffee Does Not Exist @ Specified Store");
+                                }
+
+                        }
+
+                        // get reward points/redeem points from coffee
+                        for (int i : coffeeIds) {
+                                query = "SELECT reward_points, redeem_points FROM coffee WHERE coffee_Id = ?";
+                                prepStatement = connection.prepareStatement(query);
+                                prepStatement.setInt(1, i);
+                                rs = prepStatement.executeQuery();
+
+                                if (rs.next()) {
+                                        addPoints.add(rs.getDouble(1));
+                                        subPoints.add(rs.getDouble(2));
+                                }
+                        }
+
+                        // get membership level
+                        int memberlevel = 0;
+                        query = "SELECT memberlevel_id FROM customer WHERE customer_id = ?";
+                        prepStatement = connection.prepareStatement(query);
+                        prepStatement.setInt(1, customerId);
+                        rs = prepStatement.executeQuery();
+
+                        if (rs.next()) {
+                                memberlevel = rs.getInt(1);
+                        }
+
+                        // get boosterfactor
+                        double booster = 0.0;
+                        query = "SELECT booster_factor FROM memberlevel WHERE memberlevel_id = ?";
+                        prepStatement = connection.prepareStatement(query);
+                        prepStatement.setInt(1, memberlevel);
+                        rs = prepStatement.executeQuery();
+                        if (rs.next()) {
+                                booster = rs.getInt(1);
+                        }
+
+                        // get total customer points
+                        double points = getPointsByCustomerId(customerId);
+                        double rewardTotal = 0.0;
+                        double redeemTotal = 0.0;
+                        int promote = 1;
+
+                        // total # redeem points
+                        for (int i = 0; i < coffeeIds.size(); i++) {
+
+                                // check if there's a promotion
+                                query = "SELECT promotion_id FROM promotefor WHERE coffee_id = ?";
+                                prepStatement = connection.prepareStatement(query);
+                                prepStatement.setInt(1, memberlevel);
+                                rs = prepStatement.executeQuery();
+                                if (rs.next()) {
+                                        int promotion_id = rs.getInt(1);
+                                        if (hasPromotion(storeId, promotion_id) == 1) {
+                                                query = "SELECT * FROM promotion WHERE promotion_id = ? AND ? BETWEEN start_date and end_date";
+                                                prepStatement = connection.prepareStatement(query);
+                                                prepStatement.setInt(1, promotion_id);
+                                                prepStatement.setDate(2, purchaseTime);
+                                                rs = prepStatement.executeQuery();
+                                                if (rs.next())
+                                                        promote = 1;
+                                                else
+                                                        promote = 2;
+
+                                        }
+                                }
+                                rewardTotal = rewardTotal
+                                                + addPoints.get(i) * purchaseQuantities.get(i) * booster * promote;
+                                redeemTotal = redeemTotal + subPoints.get(i) * redeemQuantities.get(i);
+                        }
+
+                        // not enough points to redeem
+                        if (points < redeemTotal)
+                                throw new IllegalArgumentException();
+
+                        // otherwise add it to the purchase table
                         query = "INSERT INTO purchase (\"purchase_id\", \"customer_id\", \"store_id\", \"purchase_time\") VALUES (DEFAULT,?,?,?) RETURNING purchase_id";
                         prepStatement = connection.prepareStatement(query);
                         prepStatement.setInt(1, customerId);
@@ -231,10 +325,21 @@ public class BoutiqueCoffee {
                         if (rs.next()) {
                                 result = rs.getInt(1);
                         }
+
+                        for (int i = 0; i < coffeeIds.size(); i++) {
+                                query = "INSERT INTO buycoffee VALUES (?,?,?,?)";
+                                prepStatement = connection.prepareStatement(query);
+                                prepStatement.setInt(1, result);
+                                prepStatement.setInt(2, coffeeIds.get(i));
+                                prepStatement.setInt(3, purchaseQuantities.get(i));
+                                prepStatement.setInt(4, redeemQuantities.get(i));
+                                prepStatement.executeUpdate();
+                        }
+
+                        return result;
                 } catch (Exception e) {
-                        e.printStackTrace();
+                        return -1;
                 }
-                return result;
         }
 
         // @return a list of ID of all coffees in the database.
@@ -244,18 +349,19 @@ public class BoutiqueCoffee {
                 List<Integer> id = new ArrayList<>();
                 try {
 
-                    // get the ids of all coffees
-                    statement = connection.createStatement();
-                    rs = statement.executeQuery("SELECT (Coffee_ID) FROM Coffee");
-                    
-                    // iterate through each row of rs and add coffee_id to id list
-                    while(rs.next()) {
-                    	int i = rs.getInt("Coffee_ID");                    	
-                    	id.add(i);
-                    }
-                    statement.close();   
+                        // get the ids of all coffees
+                        statement = connection.createStatement();
+                        rs = statement.executeQuery("SELECT (Coffee_ID) FROM Coffee");
+
+                        // iterate through each row of rs and add coffee_id to id list
+                        while (rs.next()) {
+                                int i = rs.getInt("Coffee_ID");
+                                id.add(i);
+                        }
+                        statement.close();
+
                 } catch (Exception e) {
-                    e.printStackTrace();
+                        e.printStackTrace();
                 }
                 return id;
         }
@@ -268,27 +374,23 @@ public class BoutiqueCoffee {
                 List<Integer> id = new ArrayList<>();
                 try {
 
-                    // get the ids of all coffees satisfying condition                    
-              
-                    query = "SELECT (Coffee_ID) " 
-                    		+ "FROM Coffee "  
-                    		+ "WHERE Name LIKE '%?%' AND Name LIKE '%?%'";
-                    
-                    prepStatement = connection.prepareStatement(query);
-                    prepStatement.setString(1, keyword1);
-                    prepStatement.setString(2, keyword2);
-                    
-                    rs = prepStatement.executeQuery();
-                    
-                    
-                    // iterate through each row of rs and add coffee_id to id list
-                    while(rs.next()) {
-                    	int i = rs.getInt("Coffee_ID");                    	
-                    	id.add(i);
-                    }
-         
+                        // get the ids of all coffees satisfying condition
+                        query = "SELECT (Coffee_ID) " + "FROM Coffee " + "WHERE Name LIKE '%?%' AND Name LIKE '%?%'";
+
+                        prepStatement = connection.prepareStatement(query);
+                        prepStatement.setString(1, keyword1);
+                        prepStatement.setString(2, keyword2);
+
+                        rs = prepStatement.executeQuery();
+
+                        // iterate through each row of rs and add coffee_id to id list
+                        while (rs.next()) {
+                                int i = rs.getInt("Coffee_ID");
+                                id.add(i);
+                        }
+
                 } catch (Exception e) {
-                    e.printStackTrace();
+                        e.printStackTrace();
                 }
                 return id;
         }
@@ -299,23 +401,19 @@ public class BoutiqueCoffee {
                 double points = -1;
                 try {
 
-                    // get the ids of all coffees satisfying condition                    
-              
-                    query = "SELECT (Total_Points) " 
-                    		+ "FROM Customer "  
-                    		+ "WHERE Customer_ID = ?";
-                    
-                    prepStatement = connection.prepareStatement(query);
-                    prepStatement.setInt(1, customerId);
-                    
-                    rs = prepStatement.executeQuery();
-                    
-                    if (rs.next()) {
-                    	points = rs.getDouble("Total_Points");
-                    }
-         
+                        // get the ids of all coffees satisfying condition
+                        query = "SELECT (Total_Points) " + "FROM Customer " + "WHERE Customer_ID = ?";
+                        prepStatement = connection.prepareStatement(query);
+                        prepStatement.setInt(1, customerId);
+
+                        rs = prepStatement.executeQuery();
+
+                        if (rs.next()) {
+                                points = rs.getDouble("Total_Points");
+                        }
+
                 } catch (Exception e) {
-                    e.printStackTrace();
+                        e.printStackTrace();
                 }
                 return points;
         }
@@ -338,34 +436,30 @@ public class BoutiqueCoffee {
         public List<Integer> getTopKStoresInPastXMonth(int k, int x) {
                 List<Integer> id = new ArrayList<>();
                 try {
-                	
-                	// past number of days 
-                    int days = 30*x;
-              
-                    
-                    query = "SELECT store_id, sum(purchase_quantity) FROM purchase JOIN buycoffee b ON purchase.purchase_id = b.purchase_id" + 
-                    		"WHERE current_date - purchase_time <= ?" + 
-                    		"GROUP BY store_id" + 
-                    		"ORDER BY sum(b.purchase_quantity) DESC" + 
-                    		"LIMIT ?";
-                    
-                    prepStatement = connection.prepareStatement(query);
-                    prepStatement.setInt(1, days);
-                    prepStatement.setInt(2, k);
-                    
-                    rs = prepStatement.executeQuery();
-                    
-                    
-                    // iterate through each row of rs and add coffee_id to id list
-                    while(rs.next()) {
-                    	int i = rs.getInt("Store_ID");                    	
-                    	id.add(i);
-                    }
-         
+
+                        // past number of days
+                        int days = 30 * x;
+
+                        query = "SELECT store_id, sum(purchase_quantity) FROM purchase JOIN buycoffee b ON purchase.purchase_id = b.purchase_id"
+                                        + "WHERE current_date - purchase_time <= ?" + "GROUP BY store_id"
+                                        + "ORDER BY sum(b.purchase_quantity) DESC" + "LIMIT ?";
+
+                        prepStatement = connection.prepareStatement(query);
+                        prepStatement.setInt(1, days);
+                        prepStatement.setInt(2, k);
+
+                        rs = prepStatement.executeQuery();
+
+                        // iterate through each row of rs and add coffee_id to id list
+                        while (rs.next()) {
+                                int i = rs.getInt("Store_ID");
+                                id.add(i);
+                        }
+                        return id;
+
                 } catch (Exception e) {
-                    e.printStackTrace();
+                        return null;
                 }
-                return id;
         }
 
         // @param k - the K in top K
@@ -385,36 +479,32 @@ public class BoutiqueCoffee {
         // failed.
         public List<Integer> getTopKCustomersInPastXMonth(int k, int x) {
                 List<Integer> id = new ArrayList<>();
-                
+
                 try {
-                	
-                	// past number of days 
-                    int days = 30*x;
-              
-                    
-                    query = "SELECT customer_id, sum(purchase_quantity) FROM purchase JOIN buycoffee b ON purchase.purchase_id = b.purchase_id" + 
-                    		"WHERE current_date - purchase_time <= ?" + 
-                    		"GROUP BY customer_id" + 
-                    		"ORDER BY sum(b.purchase_quantity) DESC" + 
-                    		"LIMIT ?";
-                    
-                    prepStatement = connection.prepareStatement(query);
-                    prepStatement.setInt(1, days);
-                    prepStatement.setInt(2, k);
-                    
-                    rs = prepStatement.executeQuery();
-                    
-                    
-                    // iterate through each row of rs and add coffee_id to id list
-                    while(rs.next()) {
-                    	int i = rs.getInt("Customer_ID");                    	
-                    	id.add(i);
-                    }
-         
+
+                        // past number of days
+                        int days = 30 * x;
+
+                        query = "SELECT customer_id, sum(purchase_quantity) FROM purchase JOIN buycoffee b ON purchase.purchase_id = b.purchase_id"
+                                        + "WHERE current_date - purchase_time <= ?" + "GROUP BY customer_id"
+                                        + "ORDER BY sum(b.purchase_quantity) DESC" + "LIMIT ?";
+
+                        prepStatement = connection.prepareStatement(query);
+                        prepStatement.setInt(1, days);
+                        prepStatement.setInt(2, k);
+
+                        rs = prepStatement.executeQuery();
+
+                        // iterate through each row of rs and add coffee_id to id list
+                        while (rs.next()) {
+                                int i = rs.getInt("Customer_ID");
+                                id.add(i);
+                        }
+
                 } catch (Exception e) {
-                    e.printStackTrace();
+                        e.printStackTrace();
                 }
-                
+
                 return id;
         }
 

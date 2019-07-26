@@ -17,9 +17,9 @@ public class DataInsert {
 
         try {
             // add store
-            String str = "insert into store values (";
+            String str = "store,";
             BufferedReader reader = new BufferedReader(new FileReader("addStore_name.txt"));
-            BufferedWriter writer = new BufferedWriter(new FileWriter("customersBM.sql"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("benchmark.csv"));
             // "store_id\",\"name\", \"address\",
             // \"store_type\", \"gps_long\", \"gps_lat\") VALUES (DEFAULT,?,?,?,?,?)
             // RETURNING store_id";
@@ -54,25 +54,25 @@ public class DataInsert {
             for (int i = 0; i < 50; i++) {
                 writer.write(str);
                 // writer.write(info[i][0] + ","); // id
-                writer.write("DEFAULT,"); // id
-                writer.write("'" + info[i][0] + "',"); // name
-                writer.write("'" + info[i][1] + "',"); // addr
+                // writer.write("DEFAULT,"); // id
+                writer.write(info[i][0] + ","); // name
+                writer.write(info[i][1] + ","); // addr
                 random = rand.nextInt(5) + 1; // random type
-                writer.write("'" + sType[random - 1] + "',");
+                writer.write(sType[random - 1] + ",");
                 random = rand.nextInt(100);
                 random2 = rand.nextInt(100);
-                writer.write("'" + random + "." + random2 + "',"); // gps_long
+                writer.write(random + "." + random2 + ","); // gps_long
                 random = rand.nextInt(100); // random type
                 random2 = rand.nextInt(100);
-                writer.write("'" + random + "." + random2 + "'"); // gps_lat
+                writer.write(random + "." + random2); // gps_lat
 
-                writer.write(");\n");
+                writer.write("\n");
             }
 
             reader.close();
 
             // Add coffee
-            str = "insert into coffee values (";
+            str = "coffee";
             reader = new BufferedReader(new FileReader("addCoffee_name.txt"));
             String[] coffee = new String[45];
 
@@ -96,33 +96,32 @@ public class DataInsert {
             for (int i = 0; i < 45; i++) {
                 writer.write(str);
                 // writer.write(info[i][0] + ","); // id
-                writer.write("DEFAULT,"); // id
-                writer.write("'" + coffee[i] + "',"); // name
+                writer.write(coffee[i] + ","); // name
 
                 random = rand.nextInt(15) + 1;
-                writer.write("'" + sType[random] + "',"); // desc
+                writer.write(sType[random] + ","); // desc
 
                 random = rand.nextInt(10) + 1; // intensity
-                writer.write("'" + random + "',");
+                writer.write(random + ",");
 
                 random = rand.nextInt(10);
                 random2 = rand.nextInt(100);
-                writer.write("'" + random + "." + random2 + "',"); // price
+                writer.write(random + "." + random2 + ","); // price
 
                 random = rand.nextInt(5);
                 random2 = rand.nextInt(100);
-                writer.write("'" + random + "." + random2 + "',"); // reward points
+                writer.write(random + "." + random2 + ","); // reward points
 
                 random = rand.nextInt(5);
                 random2 = rand.nextInt(100);
-                writer.write("'" + random + "." + random2 + "'"); // redeem points
+                writer.write(random + "." + random2); // redeem points
 
-                writer.write(");\n");
+                writer.write("\n");
             }
             reader.close();
 
             // // offer coffee
-            str = "insert into offercoffee values (";
+            str = "offercoffee,";
             for (int i = 0; i < 50; i++) {
                 random = rand.nextInt(10) + 1;// store offer 15 coffees
                 int j = 0;
@@ -131,7 +130,7 @@ public class DataInsert {
                     writer.write(i + 1 + ","); // store id
                     random2 = rand.nextInt(45);
                     writer.write(Integer.toString(random2 + 1));
-                    writer.write(");\n");
+                    writer.write("\n");
                     j++;
                 }
             }
@@ -143,46 +142,45 @@ public class DataInsert {
                 count++;
             }
             String date = "";
-            str = "insert into promotion values (";
+            str = "promotion,";
             for (int i = 0; i < 25; i++) {
                 writer.write(str);
-                writer.write("DEFAULT,"); // id
-                writer.write("'" + sType[i] + "',"); // name
+                writer.write("," + sType[i] + ","); // name
                 date = Integer.toString(rand.nextInt(3) + 2016); // year
                 date = date + "-" + Integer.toString(rand.nextInt(12) + 1); // month
                 date = date + "-" + Integer.toString(rand.nextInt(30) + 1); // day
-                writer.write("'" + date + "',");
+                writer.write(date + ",");
                 date = Integer.toString(rand.nextInt(3) + 2016); // year
                 date = date + "-" + Integer.toString(rand.nextInt(12) + 1); // month
                 date = date + "-" + Integer.toString(rand.nextInt(30) + 1); // day
-                writer.write("'" + date + "'");
-                writer.write(");\n");
+                writer.write(date);
+                writer.write("\n");
             }
 
-            str = "insert into promotefor values (";
+            str = "promotefor,";
             for (int i = 0; i < 25; i++) {
                 writer.write(str);
                 random = rand.nextInt(25) + 1;
                 writer.write(Integer.toString(random) + ",");
                 random2 = rand.nextInt(45) + 1;
                 writer.write(Integer.toString(random2));
-                writer.write(");\n");
+                writer.write("\n");
             }
 
-            str = "insert into haspromotion values (";
-            for (int i = 0; i < 100; i++) {
-                writer.write(str);
-                random = rand.nextInt(50) + 1;
-                writer.write(Integer.toString(random) + ",");
-                random2 = rand.nextInt(25) + 1;
-                writer.write(Integer.toString(random2));
-                writer.write(");\n");
-            }
+            // str = "haspromotion,";
+            // for (int i = 0; i < 100; i++) {
+            // writer.write(str);
+            // random = rand.nextInt(50) + 1;
+            // writer.write(Integer.toString(random) + ",");
+            // random2 = rand.nextInt(25) + 1;
+            // writer.write(Integer.toString(random2));
+            // writer.write("\n");
+            // }
             // add customer
 
             reader.close();
 
-            str = "insert into customer values (";
+            str = "customer,";
             reader = new BufferedReader(new FileReader("addCustomer_name.txt"));
 
             count = 0;
@@ -198,10 +196,9 @@ public class DataInsert {
             for (int i = 0; i < 50; i++) {
                 writer.write(str);
                 // writer.write(info[i][0] + ","); // id
-                writer.write("DEFAULT,");
-                writer.write("'" + info[i][1] + "'" + "," + "'" + info[i][2] + "'" + "," + "'" + info[i][3] + "'" + ","
+                writer.write(info[i][1] + "," + info[i][2] + "," + info[i][3] + ","
                         + Integer.toString(rand.nextInt(5) + 1) + "," + Integer.toString(rand.nextInt(1000)));
-                writer.write(");\n");
+                writer.write("\n");
             }
 
             // Purchase_ID int,
@@ -212,14 +209,13 @@ public class DataInsert {
             // foreign key (Customer_ID) references customer(Customer_ID),
             // foreign key (Store_ID) references store(Store_ID)
 
-            str = "insert into purchase values (";
+            str = "purchase,";
 
             for (int i = 0; i < 200; i++) {
 
-                writer.write(str + "DEFAULT" + "," + info[rand.nextInt(50)][0] + ","
-                        + Integer.toString(rand.nextInt(50) + 1) + "," + "'" + Integer.toString(rand.nextInt(3) + 2016)
-                        + "-" + Integer.toString(rand.nextInt(12) + 1) + "-" + Integer.toString(rand.nextInt(30) + 1)
-                        + "');\n");
+                writer.write(str + info[rand.nextInt(50)][0] + "," + Integer.toString(rand.nextInt(50) + 1) + ","
+                        + Integer.toString(rand.nextInt(3) + 2016) + "-" + Integer.toString(rand.nextInt(12) + 1) + "-"
+                        + Integer.toString(rand.nextInt(30) + 1) + "\n");
 
             }
             reader.close();
