@@ -10,7 +10,10 @@ all:
 	mkdir -p ./src/jar
 	cd ./src/jar && wget -N $(JAR)
 	$(JC) $(JFLAGS) -d './build' src/*.java
-	cp benchmark.csv ./build/benchmark.csv
+	cp ./benchmark.csv ./build/benchmark.csv
+	cp ./benchmark2.csv ./build/benchmark2.csv
+	cp ./benchmark3.csv ./build/benchmark3.csv
+
 clean:
 	rm -r build
 	rm -r src/jar
