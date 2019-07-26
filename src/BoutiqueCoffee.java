@@ -188,6 +188,9 @@ public class BoutiqueCoffee {
         public int addCustomer(String firstName, String lastName, String email, int memberLevelId, double totalPoints) {
                 int result = -1;
                 try {
+                        query = "INSERT INTO customer (\"customer_id\", \"first_name\", \"last_name\", \"email\", \"memberlevel_id\", \"total_points\") VALUES (DEFAULT,?,?,?,?,?) RETURNING customer_id";
+                        prepStatement = connection.prepareStatement(query);
+                        prepStatement.setString(1, firstName);
                         prepStatement.setString(1, firstName);
                         prepStatement.setString(2, lastName);
                         prepStatement.setString(3, email);
