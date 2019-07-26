@@ -188,8 +188,6 @@ public class BoutiqueCoffee {
         public int addCustomer(String firstName, String lastName, String email, int memberLevelId, double totalPoints) {
                 int result = -1;
                 try {
-                        query = "INSERT INTO customer (\"customer_id\", \"first_name\", \"last_name\", \"email\", \"memberlevel_id\", \"total_points\") VALUES (DEFAULT,?,?,?,?,?) RETURNING customer_id";
-                        prepStatement = connection.prepareStatement(query);
                         prepStatement.setString(1, firstName);
                         prepStatement.setString(2, lastName);
                         prepStatement.setString(3, email);
@@ -236,11 +234,24 @@ public class BoutiqueCoffee {
                                 prepStatement.setInt(2, i);
                                 rs = prepStatement.executeQuery();
                                 if (!rs.next()) {
-                                        System.out.println("Coffee Does Not Exist @ Specified Store");
                                         return -1;
                                 }
                         }
+                        for (int i : coffeeIds) {
+                                query = "SELECT reward_points, redeem_points FROM coffee WHERE coffee_Id = ?";
+                                prepStatement = connection.prepareStatement(query);
+                                prepStatement.setInt(1, i);
+                                rs = prepStatement.executeQuery();
 
+                                if (rs.next()) {
+                                        addPoints.add(rs.getDouble(1));
+                                        subPoints.add(rs.getDouble(2));
+                                }
+                        }
+                        // get total customer points
+                        double points = getPointsByCustomerId(customerId);
+                        double rewardTotal = 0.0;
+                        double redeemTotal = 0.0;
                         // get reward points/redeem points from coffee
                         for (int i : coffeeIds) {
                                 query = "SELECT reward_points, redeem_points FROM coffee WHERE coffee_Id = ?";
@@ -253,33 +264,10 @@ public class BoutiqueCoffee {
                                         subPoints.add(rs.getDouble(2));
                                 }
                         }
-
-                        // get membership level
-                        int memberlevel = 0;
-                        query = "SELECT memberlevel_id FROM customer WHERE customer_id = ?";
-                        prepStatement = connection.prepareStatement(query);
-                        prepStatement.setInt(1, customerId);
-                        rs = prepStatement.executeQuery();
-
-                        if (rs.next()) {
-                                memberlevel = rs.getInt(1);
+                        for (int i = 0; i < coffeeIds.size(); i++) {
+                                rewardTotal = rewardTotal + addPoints.get(i) * purchaseQuantities.get(i);
+                                redeemTotal = redeemTotal + subPoints.get(i) * redeemQuantities.get(i);
                         }
-
-                        // get boosterfactor
-                        double booster = 0.0;
-                        query = "SELECT booster_factor FROM memberlevel WHERE memberlevel_id = ?";
-                        prepStatement = connection.prepareStatement(query);
-                        prepStatement.setInt(1, memberlevel);
-                        rs = prepStatement.executeQuery();
-                        if (rs.next()) {
-                                booster = rs.getInt(1);
-                        }
-
-                        // get total customer points
-                        double points = getPointsByCustomerId(customerId);
-                        double rewardTotal = 0.0;
-                        double redeemTotal = 0.0;
-                        // int promote = 1;
 
                         // not enough points to redeem
                         if (points < redeemTotal)
@@ -314,6 +302,8 @@ public class BoutiqueCoffee {
                                 prepStatement.setInt(3, purchaseQuantities.get(i));
                                 prepStatement.setInt(4, redeemQuantities.get(i));
                                 prepStatement.executeUpdate();
+                                connection.setAutoCommit(false);
+
                         }
                         connection.commit();
                         return result;
@@ -355,7 +345,7 @@ public class BoutiqueCoffee {
                 try {
 
                         // get the ids of all coffees satisfying condition
-                        query = "SELECT (Coffee_ID) " + "FROM Coffee " + "WHERE Name LIKE '%?%' AND Name LIKE '%?%'";
+                        connection.commit();
 
                         prepStatement = connection.prepareStatement(query);
                         prepStatement.setString(1, keyword1);
