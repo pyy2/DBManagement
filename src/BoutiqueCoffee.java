@@ -188,7 +188,6 @@ public class BoutiqueCoffee {
         public int addCustomer(String firstName, String lastName, String email, int memberLevelId, double totalPoints) {
                 int result = -1;
                 try {
-
                         query = "INSERT INTO customer (\"customer_id\", \"first_name\", \"last_name\", \"email\", \"memberlevel_id\", \"total_points\") VALUES (DEFAULT,?,?,?,?,?) RETURNING customer_id";
                         prepStatement = connection.prepareStatement(query);
                         prepStatement.setString(1, firstName);
@@ -236,9 +235,10 @@ public class BoutiqueCoffee {
                                 prepStatement.setInt(1, storeId);
                                 prepStatement.setInt(2, i);
                                 rs = prepStatement.executeQuery();
-                                if (rs.next() == false) {
+                                if (rs.next())
                                         System.out.println("Coffee Does Not Exist @ Specified Store");
-                                }
+                                else
+                                        return -1;
 
                         }
 
@@ -280,39 +280,13 @@ public class BoutiqueCoffee {
                         double points = getPointsByCustomerId(customerId);
                         double rewardTotal = 0.0;
                         double redeemTotal = 0.0;
-                        int promote = 1;
-
-                        // total # redeem points
-                        for (int i = 0; i < coffeeIds.size(); i++) {
-
-                                // check if there's a promotion
-                                query = "SELECT promotion_id FROM promotefor WHERE coffee_id = ?";
-                                prepStatement = connection.prepareStatement(query);
-                                prepStatement.setInt(1, memberlevel);
-                                rs = prepStatement.executeQuery();
-                                if (rs.next()) {
-                                        int promotion_id = rs.getInt(1);
-                                        if (hasPromotion(storeId, promotion_id) == 1) {
-                                                query = "SELECT * FROM promotion WHERE promotion_id = ? AND ? BETWEEN start_date and end_date";
-                                                prepStatement = connection.prepareStatement(query);
-                                                prepStatement.setInt(1, promotion_id);
-                                                prepStatement.setDate(2, purchaseTime);
-                                                rs = prepStatement.executeQuery();
-                                                if (rs.next())
-                                                        promote = 1;
-                                                else
-                                                        promote = 2;
-
-                                        }
-                                }
-                                rewardTotal = rewardTotal
-                                                + addPoints.get(i) * purchaseQuantities.get(i) * booster * promote;
-                                redeemTotal = redeemTotal + subPoints.get(i) * redeemQuantities.get(i);
-                        }
+                        // int promote = 1;
 
                         // not enough points to redeem
                         if (points < redeemTotal)
                                 throw new IllegalArgumentException();
+
+                        connection.setAutoCommit(false);
 
                         // otherwise add it to the purchase table
                         query = "INSERT INTO purchase (\"purchase_id\", \"customer_id\", \"store_id\", \"purchase_time\") VALUES (DEFAULT,?,?,?) RETURNING purchase_id";
@@ -326,6 +300,13 @@ public class BoutiqueCoffee {
                                 result = rs.getInt(1);
                         }
 
+                        double update = points - redeemTotal;
+                        query = "UPDATE customer SET total_points = ? WHERE customer_id = ?";
+                        prepStatement = connection.prepareStatement(query);
+                        prepStatement.setDouble(1, update);
+                        prepStatement.setInt(2, customerId);
+                        prepStatement.executeUpdate();
+
                         for (int i = 0; i < coffeeIds.size(); i++) {
                                 query = "INSERT INTO buycoffee VALUES (?,?,?,?)";
                                 prepStatement = connection.prepareStatement(query);
@@ -335,7 +316,7 @@ public class BoutiqueCoffee {
                                 prepStatement.setInt(4, redeemQuantities.get(i));
                                 prepStatement.executeUpdate();
                         }
-
+                        connection.commit();
                         return result;
                 } catch (Exception e) {
                         return -1;

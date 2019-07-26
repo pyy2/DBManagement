@@ -49,6 +49,9 @@ public class BCDriver {
         String[] tempS = new String[100];
         double tempD = 0.0;
         List<Integer> tempL = null;
+        List<Integer> temp1 = null;
+        List<Integer> temp2 = null;
+        List<Integer> temp3 = null;
 
         // prompt for username/password
         System.out.print("Username: ");
@@ -282,10 +285,9 @@ public class BCDriver {
                     System.out.println("Error retrieving coffeelist");
                 else if (tempL.isEmpty())
                     System.out.println("No coffees in database");
-                else {
+                else
                     for (Integer i : tempL)
                         System.out.println(i);
-                }
                 break;
 
             // get coffee by keywords
@@ -329,7 +331,8 @@ public class BCDriver {
                 if (topKStores == null || topKStores.isEmpty())
                     System.out.println("Operation Failed or no stores");
                 else
-                    System.out.println("Operation Succeeded!");
+                    for (int i : topKStores)
+                        System.out.println(i);
                 break;
 
             // get top K customers past X months
@@ -343,14 +346,27 @@ public class BCDriver {
                 if (topKCustomers == null || topKCustomers.isEmpty())
                     System.out.println("Operation Failed or no customers");
                 else
-                    System.out.println("Operation Succeeded!");
+                    for (int i : topKCustomers)
+                        System.out.println(i);
                 break;
 
             case 15:
                 String line = "";
                 String s[] = null;
                 try {
-                    BufferedReader reader = new BufferedReader(new FileReader("./benchmark.csv"));
+                    System.out.println("Choose Benchmark File:");
+                    System.out.println("1.\t500 inserts");
+                    System.out.println("2.\t250 inserts");
+                    System.out.println("3.\t50 inserts");
+                    choice = Integer.parseInt(scan.nextLine());
+                    BufferedReader reader = null;
+                    if (choice == 1)
+                        reader = new BufferedReader(new FileReader("./benchmark.csv"));
+                    else if (choice == 2)
+                        reader = new BufferedReader(new FileReader("./benchmark2.csv"));
+                    else if (choice == 3)
+                        reader = new BufferedReader(new FileReader("./benchmark3.csv"));
+
                     while ((line = reader.readLine()) != null) {
                         s = line.split(",");
                         if (s[0].equals("memberlevel")) {
@@ -400,7 +416,6 @@ public class BCDriver {
                             else
                                 System.out.println("Store has specified promotion!");
                         }
-
                         if (s[0].equals("customer")) {
                             result = bc.addCustomer(s[1], s[2], s[3], Integer.parseInt(s[4]), Double.parseDouble(s[5]));
                             if (result == -1)
@@ -409,8 +424,16 @@ public class BCDriver {
                                 System.out.println("Customer Successfully Added: " + result);
                         }
                         if (s[0].equals("purchase")) {
-                            bc.addPurchase(Integer.parseInt(s[1]), Integer.parseInt(s[2]), Date.valueOf(s[3]), null,
-                                    null, null);
+                            temp1 = new ArrayList<>();
+                            temp2 = new ArrayList<>();
+                            temp3 = new ArrayList<>();
+
+                            temp1.add(Integer.parseInt(s[4]));
+                            temp2.add(Integer.parseInt(s[5]));
+                            temp3.add(Integer.parseInt(s[6]));
+
+                            bc.addPurchase(Integer.parseInt(s[1]), Integer.parseInt(s[2]), Date.valueOf(s[3]), temp1,
+                                    temp2, temp3);
                         }
                         if (s[0].equals("customerid")) {
                             tempD = bc.getPointsByCustomerId(Integer.parseInt(s[1]));
@@ -427,8 +450,8 @@ public class BCDriver {
                             if (topS == null || topS.isEmpty())
                                 System.out.println("Operation Failed or no stores");
                             else
-                                System.out.println("Operation Succeeded!");
-
+                                for (int i : topS)
+                                    System.out.println(i);
                         }
                     }
                     break;

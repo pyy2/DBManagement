@@ -9,12 +9,13 @@ public class DataInsert {
 
         Scanner scanner = null;
         Random rand = new Random();
-        String[][] info = new String[50][4];
+        String[][] info = new String[500][4];
         String line = "";
         StringTokenizer st = null;
         int random = 0;
         int random2 = 0;
 
+        final int MAX = 500;
         try {
             // add store
             String str = "store,";
@@ -23,10 +24,11 @@ public class DataInsert {
             // "store_id\",\"name\", \"address\",
             // \"store_type\", \"gps_long\", \"gps_lat\") VALUES (DEFAULT,?,?,?,?,?)
             // RETURNING store_id";
-
+            writer.write(
+                    "memberlevel,private,1\nmemberlevel,corporal,1.5\nmemberlevel,sergeant,2\nmemberlevel,master,2.5\nmemberlevel,commander,3\n");
             // store name
             int count = 0;
-            while ((line = reader.readLine()) != null && count < 50) {
+            while ((line = reader.readLine()) != null && count < MAX) {
                 info[count][0] = line;
                 count++;
             }
@@ -35,7 +37,7 @@ public class DataInsert {
 
             // store addr
             count = 0;
-            while ((line = reader.readLine()) != null && count < 50) {
+            while ((line = reader.readLine()) != null && count < MAX) {
                 info[count][1] = line;
                 count++;
             }
@@ -43,7 +45,7 @@ public class DataInsert {
             // store type
             reader.close();
             reader = new BufferedReader(new FileReader("addStore_type.txt"));
-            String sType[] = new String[100];
+            String sType[] = new String[MAX];
             // store addr
             count = 0;
             while ((line = reader.readLine()) != null && count < 5) {
@@ -51,7 +53,7 @@ public class DataInsert {
                 count++;
             }
 
-            for (int i = 0; i < 50; i++) {
+            for (int i = 0; i < MAX; i++) {
                 writer.write(str);
                 // writer.write(info[i][0] + ","); // id
                 // writer.write("DEFAULT,"); // id
@@ -72,13 +74,13 @@ public class DataInsert {
             reader.close();
 
             // Add coffee
-            str = "coffee";
+            str = "coffee,";
             reader = new BufferedReader(new FileReader("addCoffee_name.txt"));
-            String[] coffee = new String[45];
+            String[] coffee = new String[MAX];
 
             // String name,
             count = 0;
-            while ((line = reader.readLine()) != null && count < 45) {
+            while ((line = reader.readLine()) != null && count < MAX) {
                 coffee[count] = line;
                 count++;
             }
@@ -93,7 +95,7 @@ public class DataInsert {
                 count++;
             }
             reader.close();
-            for (int i = 0; i < 45; i++) {
+            for (int i = 0; i < MAX; i++) {
                 writer.write(str);
                 // writer.write(info[i][0] + ","); // id
                 writer.write(coffee[i] + ","); // name
@@ -122,35 +124,31 @@ public class DataInsert {
 
             // // offer coffee
             str = "offercoffee,";
-            for (int i = 0; i < 50; i++) {
-                random = rand.nextInt(10) + 1;// store offer 15 coffees
-                int j = 0;
-                while (j < random) {
-                    writer.write(str);
-                    writer.write(i + 1 + ","); // store id
-                    random2 = rand.nextInt(45);
-                    writer.write(Integer.toString(random2 + 1));
-                    writer.write("\n");
-                    j++;
-                }
+            for (int i = 0; i < MAX; i++) {
+                writer.write(str);
+                writer.write(i + 1 + ","); // store id
+                random2 = rand.nextInt(MAX);
+                writer.write(Integer.toString(random2 + 1)); // coffee offered
+                writer.write("\n");
             }
 
             reader = new BufferedReader(new FileReader("addPromo_name.txt"));
             count = 0;
-            while ((line = reader.readLine()) != null && count < 25) {
+            while ((line = reader.readLine()) != null && count < MAX) {
                 sType[count] = line;
                 count++;
             }
             String date = "";
-            str = "promotion,";
-            for (int i = 0; i < 25; i++) {
+            str = "promotion";
+            for (int i = 0; i < MAX; i++) {
                 writer.write(str);
                 writer.write("," + sType[i] + ","); // name
-                date = Integer.toString(rand.nextInt(3) + 2016); // year
+                int year = rand.nextInt(4) + 2015; // year
+                date = Integer.toString(year);
                 date = date + "-" + Integer.toString(rand.nextInt(12) + 1); // month
                 date = date + "-" + Integer.toString(rand.nextInt(30) + 1); // day
                 writer.write(date + ",");
-                date = Integer.toString(rand.nextInt(3) + 2016); // year
+                date = Integer.toString(year + 2); // year
                 date = date + "-" + Integer.toString(rand.nextInt(12) + 1); // month
                 date = date + "-" + Integer.toString(rand.nextInt(30) + 1); // day
                 writer.write(date);
@@ -158,25 +156,14 @@ public class DataInsert {
             }
 
             str = "promotefor,";
-            for (int i = 0; i < 25; i++) {
+            for (int i = 0; i < MAX; i++) {
                 writer.write(str);
-                random = rand.nextInt(25) + 1;
+                random = rand.nextInt(MAX) + 1;
                 writer.write(Integer.toString(random) + ",");
-                random2 = rand.nextInt(45) + 1;
+                random2 = rand.nextInt(MAX) + 1;
                 writer.write(Integer.toString(random2));
                 writer.write("\n");
             }
-
-            // str = "haspromotion,";
-            // for (int i = 0; i < 100; i++) {
-            // writer.write(str);
-            // random = rand.nextInt(50) + 1;
-            // writer.write(Integer.toString(random) + ",");
-            // random2 = rand.nextInt(25) + 1;
-            // writer.write(Integer.toString(random2));
-            // writer.write("\n");
-            // }
-            // add customer
 
             reader.close();
 
@@ -184,7 +171,7 @@ public class DataInsert {
             reader = new BufferedReader(new FileReader("addCustomer_name.txt"));
 
             count = 0;
-            while ((line = reader.readLine()) != null && count < 50) {
+            while ((line = reader.readLine()) != null && count < MAX) {
                 st = new StringTokenizer(line);
                 info[count][0] = Integer.toString(count + 1);
                 info[count][1] = st.nextToken();
@@ -193,31 +180,60 @@ public class DataInsert {
                 count++;
             }
 
-            for (int i = 0; i < 50; i++) {
+            for (int i = 0; i < MAX; i++) {
                 writer.write(str);
                 // writer.write(info[i][0] + ","); // id
                 writer.write(info[i][1] + "," + info[i][2] + "," + info[i][3] + ","
                         + Integer.toString(rand.nextInt(5) + 1) + "," + Integer.toString(rand.nextInt(1000)));
                 writer.write("\n");
             }
+            reader.close();
 
-            // Purchase_ID int,
-            // Customer_ID int,
-            // Store_ID int,
-            // Purchase_Time date, YYYY-MM-DD
-            // primary key (Purchase_ID),
-            // foreign key (Customer_ID) references customer(Customer_ID),
-            // foreign key (Store_ID) references store(Store_ID)
+            reader = new BufferedReader(new FileReader("benchmark.csv"));
+            int[][] temp = new int[1000][1000];
+            String[] l = new String[500];
+            String[] s = null;
+            int x = 0;
+            count = 0;
+            while ((line = reader.readLine()) != null) {
+                if (line.contains("offercoffee")) {
+                    s = line.split(",");
+                    x = Integer.parseInt(s[1]);
+                    if (l[x - 1] == null) {
+                        l[x - 1] = s[1];
+                    } else
+                        l[x - 1] = l[x - 1] + "," + s[2];
+                }
+            }
 
             str = "purchase,";
 
-            for (int i = 0; i < 200; i++) {
+            int num = 0;
+            int store = 0;
+            for (int i = 0; i < MAX; i++) {
+                num = 1;
+                store = rand.nextInt(50) + 1;
+                writer.write(str); // purchase
+                writer.write(Integer.toString(rand.nextInt(MAX) + 1) + ","); // customerid
+                writer.write(Integer.toString(store) + ",");
+                writer.write("");
+                writer.write(Integer.toString(rand.nextInt(4) + 2015) + "-" + Integer.toString(rand.nextInt(12) + 1)
+                        + "-" + Integer.toString(rand.nextInt(30) + 1) + ","); // date
+                if (l[store].contains(",")) {
+                    s = l[store].split(",");
+                    for (int j = 0; j < 1; j++) {
+                        writer.write(s[0] + ",");
+                    }
+                } else {
+                    writer.write(l[store]);
+                    num = 1;
+                }
 
-                writer.write(str + info[rand.nextInt(50)][0] + "," + Integer.toString(rand.nextInt(50) + 1) + ","
-                        + Integer.toString(rand.nextInt(3) + 2016) + "-" + Integer.toString(rand.nextInt(12) + 1) + "-"
-                        + Integer.toString(rand.nextInt(30) + 1) + "\n");
-
+                writer.write("," + Integer.toString(1) + ",");
+                writer.write(Integer.toString(1));
+                writer.write("\n");
             }
+
             reader.close();
             writer.close();
         } catch (FileNotFoundException e) {
