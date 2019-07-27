@@ -52,12 +52,10 @@ public class BCDriver {
         List<Integer> temp1 = null;
         List<Integer> temp2 = null;
         List<Integer> temp3 = null;
-        
+
         // for benchmark testing
         long startTime;
         long endTime;
-        
-        
 
         // prompt for username/password
         System.out.print("Username: ");
@@ -373,93 +371,102 @@ public class BCDriver {
                     else if (choice == 3)
                         reader = new BufferedReader(new FileReader("./benchmark3.csv"));
 
+                    List<Integer> count = new ArrayList<>();
+                    for (int i = 0; i < 10; i++) {
+                        count.add(0);
+                    }
+
+                    long store_time = 0;
+                    long coffee_time = 0;
+                    long oc_time = 0;
+                    long pTime = 0;
+                    long pfTime = 0;
+                    long hpTime = 0;
+                    long cTime = 0;
+                    long purTime = 0;
+                    long cIDtime = 0;
+                    long topStime = 0;
+
                     while ((line = reader.readLine()) != null) {
                         s = line.split(",");
                         if (s[0].equals("memberlevel")) {
-                        	startTime = System.nanoTime();
+                            startTime = System.nanoTime();
                             result = bc.addMemberLevel(s[1], Double.parseDouble(s[2]));
                             endTime = System.nanoTime();
                             if (result == -1)
                                 System.out.println("Membership failed to add");
-                            else                         
+                            else
                                 System.out.println("Membership added: " + result);
-                            System.out.println("addMemberLevel took " + (endTime - startTime)/1000000000 + " seconds");
-                                
-                            
-
                         }
                         if (s[0].equals("store")) {
-                        	startTime = System.nanoTime();
+                            count.set(0, count.get(0) + 1);
+                            startTime = System.nanoTime();
                             result = bc.addStore(s[1], s[2], s[3], Double.parseDouble(s[4]), Double.parseDouble(s[5]));
                             endTime = System.nanoTime();
-                            
+                            store_time = store_time + ((endTime - startTime));
+
                             if (result == -1)
                                 System.out.println("Failed to add Store");
                             else
                                 System.out.println("Store Successfully Added: " + result);
-                            System.out.println("addStore took " + (endTime - startTime)/1000000000 + " seconds");
 
                         }
                         if (s[0].equals("coffee")) {
-                        	startTime = System.nanoTime();
+                            count.set(1, count.get(1) + 1);
+                            startTime = System.nanoTime();
                             result = bc.addCoffee(s[1], s[2], Integer.parseInt(s[3]), Double.parseDouble(s[4]),
                                     Double.parseDouble(s[5]), Double.parseDouble(s[6]));
                             endTime = System.nanoTime();
+                            coffee_time = coffee_time + ((endTime - startTime));
                             if (result == -1)
                                 System.out.println("Failed to add Coffee");
                             else
                                 System.out.println("Coffee Successfully Added: " + result);
-                            System.out.println("addCoffee took " + (endTime - startTime)/1000000000 + " seconds");
-
                         }
                         if (s[0].equals("offercoffee")) {
-                        	startTime = System.nanoTime();
-                        	result = bc.offerCoffee(Integer.parseInt(s[1]), Integer.parseInt(s[2]));
-                        	endTime = System.nanoTime();
+                            count.set(2, count.get(2) + 1);
+                            startTime = System.nanoTime();
+                            result = bc.offerCoffee(Integer.parseInt(s[1]), Integer.parseInt(s[2]));
+                            endTime = System.nanoTime();
+                            oc_time = oc_time + ((endTime - startTime));
+
                             if (result == -1)
                                 System.out.println("Error Offering Coffee");
                             else
                                 System.out.println("Successfully Offered Coffee!");
-                            System.out.println("offerCoffee took " + (endTime - startTime)/1000000000 + " seconds");
                         }
                         if (s[0].equals("promotion")) {
-                        	startTime = System.nanoTime();
+                            count.set(3, count.get(3) + 1);
+                            startTime = System.nanoTime();
                             bc.addPromotion(s[1], Date.valueOf(s[2]), Date.valueOf(s[3]));
                             endTime = System.nanoTime();
-                            System.out.println("addPromotion took " + (endTime - startTime)/1000000000 + " seconds");
+                            pTime = pTime + ((endTime - startTime));
                         }
                         if (s[0].equals("promotefor")) {
-                        	startTime = System.nanoTime();
-                        	result = bc.promoteFor(Integer.parseInt(s[1]), Integer.parseInt(s[2]));
-                        	endTime = System.nanoTime();
+                            count.set(4, count.get(4) + 1);
+                            startTime = System.nanoTime();
+                            result = bc.promoteFor(Integer.parseInt(s[1]), Integer.parseInt(s[2]));
+                            endTime = System.nanoTime();
+                            pfTime = pfTime + ((endTime - startTime));
                             if (result == -1)
                                 System.out.println("Error Promoting");
                             else
                                 System.out.println("Successfully Promoting Coffee: " + s[2]);
-                            System.out.println("promoteFor took " + (endTime - startTime)/1000000000 + " seconds");
-                        }
-                        if (s[0].equals("haspromotion")) {
-                        	startTime = System.nanoTime();
-                        	result = bc.hasPromotion(Integer.parseInt(s[1]), Integer.parseInt(s[2]));
-                        	endTime = System.nanoTime();
-                            if (result == -1)
-                                System.out.println("Store does not have that promotion!");
-                            else
-                                System.out.println("Store has specified promotion!");
-                            System.out.println("hasPromotion took " + (endTime - startTime)/1000000000 + " seconds");
                         }
                         if (s[0].equals("customer")) {
-                        	startTime = System.nanoTime();
+                            count.set(6, count.get(6) + 1);
+                            startTime = System.nanoTime();
                             result = bc.addCustomer(s[1], s[2], s[3], Integer.parseInt(s[4]), Double.parseDouble(s[5]));
                             endTime = System.nanoTime();
+                            cTime = cTime + ((endTime - startTime));
                             if (result == -1)
                                 System.out.println("Error Adding Customer");
                             else
                                 System.out.println("Customer Successfully Added: " + result);
-                            System.out.println("addCustomer took " + (endTime - startTime)/1000000000 + " seconds");
                         }
-                        
+
                         if (s[0].equals("purchase")) {
+                            count.set(7, count.get(7) + 1);
                             temp1 = new ArrayList<>();
                             temp2 = new ArrayList<>();
                             temp3 = new ArrayList<>();
@@ -472,35 +479,45 @@ public class BCDriver {
                             bc.addPurchase(Integer.parseInt(s[1]), Integer.parseInt(s[2]), Date.valueOf(s[3]), temp1,
                                     temp2, temp3);
                             endTime = System.nanoTime();
-                            
-                            System.out.println("addPurchase took " + (endTime - startTime)/1000000000 + " seconds");
+                            purTime = purTime + ((endTime - startTime));
                         }
                         if (s[0].equals("customerid")) {
-                        	startTime = System.nanoTime();
+                            count.set(8, count.get(8) + 1);
+                            startTime = System.nanoTime();
                             tempD = bc.getPointsByCustomerId(Integer.parseInt(s[1]));
                             endTime = System.nanoTime();
-                            
+                            cIDtime = cIDtime + ((endTime - startTime));
                             if (tempD == -1)
                                 System.out.println("Error Retrieving Customer Points");
                             else
                                 System.out.println("Customer " + s[1] + " Total Points: " + Double.toString(tempD));
-                            System.out.println("getPointsByCustomerId took " + (endTime - startTime)/1000000000 + " seconds");
                         }
                         if (s[0].equals("topstores")) {
-                        	startTime = System.nanoTime();
+                            startTime = System.nanoTime();
                             List<Integer> topS = bc.getTopKStoresInPastXMonth(Integer.parseInt(s[1]),
                                     Integer.parseInt(s[2]));
                             endTime = System.nanoTime();
-
+                            topStime = topStime + ((endTime - startTime));
+                            count.set(9, count.get(9) + 1);
                             if (topS == null || topS.isEmpty())
                                 System.out.println("Operation Failed or no stores");
                             else
                                 for (int i : topS)
                                     System.out.println(i);
-                            System.out.println("getTopKStoresInPastXMonth took " + (endTime - startTime)/1000000000 + " seconds");
-                        }                        
+                        }
                     }
-                    
+                    System.out.println("\n\n#### BENCHMARK ####: " + store_time / (count.get(0) * 100000) + "ms");
+                    System.out.println("avg add store time: " + store_time / (count.get(0) * 100000) + "ms");
+                    System.out.println("avg add coffee time: " + coffee_time / (count.get(1) * 100000) + "ms");
+                    System.out.println("avg offer coffee time: " + oc_time / (count.get(2) * 100000) + "ms");
+                    System.out.println("avg add promo time: " + pTime / (count.get(3) * 100000) + "ms");
+                    System.out.println("avg promofor time: " + pfTime / (count.get(4) * 100000) + "ms");
+                    System.out.println("avg add customer time: " + cTime / (count.get(6) * 100000) + "ms");
+                    System.out.println("avg purchase time: " + purTime / (count.get(7) * 100000) + "ms");
+                    System.out.println("avg get cID time: " + cIDtime / (count.get(8) * 100000) + "ms");
+                    System.out.println("avg top store time: " + purTime / (count.get(9) * 100000) + "ms");
+
+                    reader.close();
                     break;
                 } catch (Exception e) {
                     e.printStackTrace();
