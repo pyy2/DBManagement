@@ -1,0 +1,32 @@
+## BENCHMARK FOR 500 INSERTS ##:
+avg add store time: 18ms
+avg add coffee time: 20ms
+avg offer coffee time: 12ms
+avg add promo time: 5ms
+avg promofor time: 47ms
+avg add customer time: 13ms
+avg purchase time: 24ms
+avg get cID time: 7ms
+avg top store time: 24ms
+
+## BENCHMARK FOR 250 INSERTS ##:
+avg add store time: 16ms
+avg add coffee time: 16ms
+avg offer coffee time: 16ms
+avg add promo time: 10ms
+avg promofor time: 46ms
+avg add customer time: 15ms
+avg purchase time: 29ms
+avg get cID time: 14ms
+avg top store time: 29ms
+
+## BENCHMARK FOR 50 INSERTS ##:
+avg add store time: 25ms
+avg add coffee time: 20ms
+avg offer coffee time: 23ms
+avg add promo time: 13ms
+avg promofor time: 54ms
+avg add customer time: 20ms
+avg purchase time: 36ms
+avg get cID time: 13ms
+avg top store time: 36ms

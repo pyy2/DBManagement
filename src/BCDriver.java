@@ -506,7 +506,13 @@ public class BCDriver {
                                     System.out.println(i);
                         }
                     }
-                    System.out.println("\n\n#### BENCHMARK ####: " + store_time / (count.get(0) * 100000) + "ms");
+                    if (choice == 1)
+                        choice = 500;
+                    if (choice == 2)
+                        choice = 250;
+                    if (choice == 3)
+                        choice = 50;
+                    System.out.println("\n\n## BENCHMARK FOR " + Integer.toString(choice) + " INSERTS ##:");
                     System.out.println("avg add store time: " + store_time / (count.get(0) * 100000) + "ms");
                     System.out.println("avg add coffee time: " + coffee_time / (count.get(1) * 100000) + "ms");
                     System.out.println("avg offer coffee time: " + oc_time / (count.get(2) * 100000) + "ms");
