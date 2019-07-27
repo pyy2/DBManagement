@@ -1,4 +1,0 @@
-For Phase 1 grade:
-	schema.sql
-	inserts.sql
-	trigger.sql
